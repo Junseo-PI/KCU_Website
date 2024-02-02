@@ -17,7 +17,23 @@ a {
     height: 80px;
     overflow: hidden;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #C8C8C8; /* This will create a 2px thick solid line with the color black */
+    z-index: 15;
+}
+
+.main-header.no-border {
+    border-bottom: none; /* Remove the border when hovering over the navigation items */
+}
+
+.main-header, .slide-main, .proj-overview-container {
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+.container {
+    max-width: 1320px; /* Adjust as needed */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Logo */
@@ -91,6 +107,7 @@ a {
     overflow: hidden;
     height: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Adjust the value as needed, it should be higher than the z-index of .slide-main */
 }
 
 .sub-wrap.active {
@@ -127,4 +144,154 @@ a {
 .sub-wrap > ul > li > a:hover,
 .sub-wrap > ul > li > a:focus { /* Add focus for accessibility */
     color: #90BEEC; /* This sets the text color to blue on hover */
+}
+
+.slide-main {
+    padding: 0 300px;
+    position: relative;
+    z-index: 1; /* Optional, ensures .slide-main has a lower stacking context than .sub-wrap */
+}
+
+/* Slider for Banner */
+.slide {
+    /* layout */
+    display: flex;
+    flex-wrap: nowrap;
+    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+    overflow: hidden;
+
+    /* position */
+    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+    position: relative;
+
+    /* size */
+    width: 100%;
+
+    /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+    user-select: none;
+}
+.slide_item {
+    /* layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+    position: relative;
+    left: 0px;
+
+    /* size */
+    width: 100%;
+    height: 300px;
+    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+    flex-shrink: 0;
+
+    /* transition */
+    transition: left 0.3s, width 0.3s;
+}
+.slide_button {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* position */
+    position: absolute;
+    top: calc(50% - 16px); /* Center vertically */
+
+    /* size */
+    width: 32px;
+    height: 32px;
+
+    /* style */
+    border-radius: 100%;
+    background-color: #cccccc;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's above the slide items */
+}
+
+.slide_prev_button {
+    left: 0;
+}
+
+.slide_next_button {
+    right: 0;
+}
+
+/* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+.slide_item.item1 {
+    background:url("mokup.png")
+}
+.slide_item.item2 {
+    background:url("mokup2.png")
+}
+.slide_item.item3 {
+    background-color: blueviolet;
+}
+.slide_item.item4 {
+    background-color: burlywood;
+}
+.slide_item.item5 {
+    background-color: cornflowerblue;
+}
+
+/* 페이지네이션 스타일 */
+ul,
+li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.slide_pagination {
+    /* layout */
+    display: flex;
+    gap: 5px;
+
+    /* position */
+    position: absolute;
+    bottom: 0;
+    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.slide_pagination > li {
+    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+    color: #7fb5ff88;
+    cursor: pointer;
+    font-size: 25px;
+}
+.slide_pagination > li.active {
+    /* 현재 슬라이드 색상은 투명도 없이 */
+    color: #7fb5ff;
+}
+
+.slide_item_duplicate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0px;
+    width: 100%;
+    height: 300px;
+    flex-shrink: 0;
+    transition: left 0.15s;
+}
+
+/* Projects overview  */
+.proj-overview-container {
+    padding: 0 300px;
+}
+
+@media (max-width: 1800px) { /* Start reducing padding when the screen width is less than 1800px */
+    .main-header, .slide-main, .proj-overview-container {
+        padding-left: calc((100vw - 1130px) / 2); /* 1200px is the content width */
+        padding-right: calc((100vw - 1130px) / 2);
+    }
+}
+
+@media (max-width: 1130px) { /* When the screen width is less than 1130px, set a minimum padding */
+    .main-header, .slide-main, .proj-overview-container {
+        padding-left: 0; /* Minimum padding */
+        padding-right: 0;
+    }
 }

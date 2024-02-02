@@ -11,4 +11,29 @@ public class WebPageController {
     return "index";
   }
 
+  @GetMapping("/aboutkcu")
+  public String aboutkcu() {
+    return "aboutKcu";
+  }
+
+  @GetMapping("/leaders")
+  public String leaders() {
+    return "leaders";
+  }
+
+  @GetMapping("/developers")
+  public String developers() {
+    return "websiteDevelopers";
+  }
+
+  @GetMapping("/getinvolved")
+  public String getinvolved() {
+    return "getInvolved";
+  }
+
+  @GetMapping("/projects")
+  public String projects() {
+    return "projects";
+  }
+
 }
