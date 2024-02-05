@@ -13,12 +13,13 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 300px;
     height: 80px;
     overflow: hidden;
     background-color: #fff;
     border-bottom: 1px solid #C8C8C8; /* This will create a 2px thick solid line with the color black */
     z-index: 15;
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
 }
 
 .main-header.no-border {
@@ -26,8 +27,8 @@ a {
 }
 
 .main-header, .slide-main, .proj-overview-container {
-    padding-left: 300px;
-    padding-right: 300px;
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
 }
 
 .container {
@@ -182,7 +183,7 @@ a {
 
     /* size */
     width: 100%;
-    height: 300px;
+    height: 450px;
     /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
     flex-shrink: 0;
 
@@ -282,15 +283,23 @@ li {
     padding: 0 300px;
 }
 
-@media (max-width: 1800px) { /* Start reducing padding when the screen width is less than 1800px */
-    .main-header, .slide-main, .proj-overview-container {
-        padding-left: calc((100vw - 1130px) / 2); /* 1200px is the content width */
-        padding-right: calc((100vw - 1130px) / 2);
+/* Ensure the padding is not negative */
+@media (max-width: 1320px) {
+    .main-header {
+        padding-left: 0; /* Minimum padding */
+        padding-right: 0;
     }
 }
 
-@media (max-width: 1130px) { /* When the screen width is less than 1130px, set a minimum padding */
-    .main-header, .slide-main, .proj-overview-container {
+/* Apply the same dynamic padding logic to .slide-main and .proj-overview-container */
+.slide-main, .proj-overview-container {
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+}
+
+/* Ensure the padding is not negative for .slide-main and .proj-overview-container */
+@media (max-width: 1320px) {
+    .slide-main, .proj-overview-container {
         padding-left: 0; /* Minimum padding */
         padding-right: 0;
     }
