@@ -5,7 +5,106 @@
 }
 
 a {
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
     text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+body, div, p, span, em, small, a, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+img {
+    vertical-align: top;
+}
+
+body, input, select, button, textarea {
+    color: rgb(0, 0, 0);
+    font-family: "Noto Sans KR", "Noto Sans CJK KR", "Noto Sans", "Apple SD Gothic Neo", "애플 SD 산돌고딕 Neo", AppleGothic, "New Roboto", Roboto, -apple-system, system, BlinkMacSystemFont, "SF UI Text", "SF Pro Text", BlinkMacSystemFont, "Nanum Gothic", "나눔 고딕", "Malgun Gothic", "맑은 고딕", Dotum, 돋움, Gullim, 굴림, "droid sans fallback", "Droid Sans", "Segoe UI", "helvetica neue", Tahoma, "Microsoft Sans Serif", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.btn, a.btn {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.btn-font-400, a.btn.btn-font-400 {
+    font-weight: 400;
+}
+
+.btn.btn-size-1, a.btn.btn-size-1 {
+    height: 100%;
+    padding: 0px 1.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 300;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Light-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Light-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Light-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Light-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 400;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Regular-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Regular-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Regular-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Regular-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 500;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Medium-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Medium-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Medium-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Medium-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 700;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Bold-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Bold-Hestia.otf) format('opentype');
+}
+
+html {
+    line-height: 1.5;
+    text-size-adjust: none;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 /* Header */
@@ -82,7 +181,7 @@ a {
 
 #gnbWrap .gnb > li > a {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     color: #000;
     padding: 0 10px;
     height: 100%;
@@ -127,7 +226,7 @@ a {
     padding: 24px 12px;
     color: gray;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
     transition: all .3s;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
@@ -201,22 +300,25 @@ a {
     top: calc(50% - 16px); /* Center vertically */
 
     /* size */
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 
     /* style */
-    border-radius: 100%;
-    background-color: #cccccc;
+    background-size: cover;
     cursor: pointer;
     z-index: 2; /* Ensure it's above the slide items */
 }
 
 .slide_prev_button {
     left: 0;
+    background-image: url("arr-left-circle.png");
+    background-color: transparent;
 }
 
 .slide_next_button {
     right: 0;
+    background-image: url("arr-right-circle.png");
+    background-color: transparent;
 }
 
 /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
@@ -279,11 +381,158 @@ li {
 }
 
 /* Projects overview  */
-.proj-overview-container {
-    padding: 0 300px;
+.projects-overview-carousel {
+    position: relative;
+    margin-top: 3rem;
 }
 
-/* Ensure the padding is not negative */
+.projects-overview-carousel {
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+}
+
+.overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.proj-overview-title .title {
+    font-size: 1.8rem;
+    line-height: 4rem;
+    font-weight: 500;
+}
+
+.btn.btn-blue, a.btn.btn-blue {
+    background-color: #90BEEC;
+    color: #ffffff;
+}
+
+.swiper img {
+    max-width: 100%;
+}
+
+.projects-overview-carousel .swiper-slide {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(180, 180, 180);
+}
+
+.projects-overview-carousel .swiper-slide .textbox {
+    padding: 0.5rem 0.5rem 0px;
+    border-top: 1px solid rgb(180, 180, 180);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tags {
+    line-height: 1.6rem;
+}
+
+.tags > span {
+    display: inline-block;
+    margin-right: 0.5rem;
+    padding: 0px 1rem;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    vertical-align: center;
+}
+
+.tags > span:last-child {
+    margin-right: 0px;
+}
+
+.swiper-slide .textbox .title {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.swiper-slide .textbox .team-members {
+    display: block;
+    font-size: 1rem;
+    line-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.swiper-slide .textbox .team-members > span {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.1rem;
+    padding-right: 0.5rem;
+}
+
+.swiper-slide .textbox .team-members > span::after {
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    display: block;
+    width: 1px;
+    height: 1rem;
+    margin-top: -0.5rem;
+    background: rgb(0, 0, 0);
+    content: "";
+}
+
+.swiper-slide .textbox .team-members > span:last-child::after {
+    display: none;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    /* layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* position */
+    position: absolute;
+    top: calc(50% - 16px); /* Center vertically */
+
+    /* size */
+    width: 36px;
+    height: 36px;
+
+    /* style */
+    background-size: cover;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's above the slide items */
+
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    display: none;
+}
+
+.swiper-button-prev {
+    background-image: url("arr-left-circle.png");
+    background-color: transparent;
+}
+
+.swiper-button-next {
+    background-image: url("arr-right-circle.png");
+    background-color: transparent;
+}
+
+
+.main-footer {
+    margin-top: 30px;
+}
+
+
+/* For Responsive Web Design */
 @media (max-width: 1320px) {
     .main-header {
         padding-left: 0; /* Minimum padding */
@@ -297,7 +546,7 @@ li {
     padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
 }
 
-/* Ensure the padding is not negative for .slide-main and .proj-overview-container */
+
 @media (max-width: 1320px) {
     .slide-main, .proj-overview-container {
         padding-left: 0; /* Minimum padding */

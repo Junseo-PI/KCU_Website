@@ -3,13 +3,18 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to KCU!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="styles.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </head>
 
 <body>
+<section id="container" class="page-index">
     <!-- Header -->
-    <header class="main-header">
+    <header id="header" class="main-header">
         <div class="logo-container">
             <a href="/"><img src="logo.png" alt="KCU LOGO" class="logo"></a>
             <a href="/">KCU</a>
@@ -44,22 +49,139 @@
             <div class="slide_item item3">3</div>
             <div class="slide_item item4">4</div>
             <div class="slide_item item5">5</div>
-            <div class="slide_prev_button slide_button">◀</div>
-            <div class="slide_next_button slide_button">▶</div>
+            <div class="slide_prev_button slide_button"></div>
+            <div class="slide_next_button slide_button"></div>
             <ul class="slide_pagination"></ul>
         </div>
     </div>
 
-    <!-- Projects Overview Container -->
-    <div class="proj-overview-container">
+    <!-- Projects Overview Carousel -->
+    <section class="projects-overview-carousel">
+        <div class="overview-header">
+            <div class="proj-overview-title">
+                <h2 class="title">Projects Overview - SP24</h2>
+            </div>
 
-    </div>
+            <div class="proj-overview-viewmore">
+                <a href="/projects" class="btn btn-size-1 btn-font-400 btn-blue">View More</a>
+            </div>
+        </div>
+
+
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="iPET.png">
+                    </a>
+                    <div class="textbox">
+                        <div class="tags">
+                            <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                        </div>
+                        <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
+                        <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET1</a>
+                        <div class="team-members">
+                            <!-- DB에서 값 받게끔 수정: 이름 -->
+                            <span>Junseo Lee</span>
+                            <span>염경훈</span>
+                            <span>진시우</span>
+                            <span>박민우</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="iPET.png">
+                    </a>
+                    <div class="textbox">
+                        <div class="tags">
+                            <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                        </div>
+                        <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
+                        <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET2</a>
+                        <div class="team-members">
+                            <!-- DB에서 값 받게끔 수정: 이름 -->
+                            <span>Junseo Lee</span>
+                            <span>염경훈</span>
+                            <span>진시우</span>
+                            <span>박민우</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="iPET.png">
+                    </a>
+                    <div class="textbox">
+                        <div class="tags">
+                            <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                        </div>
+                        <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
+                        <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET3</a>
+                        <div class="team-members">
+                            <!-- DB에서 값 받게끔 수정: 이름 -->
+                            <span>Junseo Lee</span>
+                            <span>염경훈</span>
+                            <span>진시우</span>
+                            <span>박민우</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="iPET.png">
+                    </a>
+                    <div class="textbox">
+                        <div class="tags">
+                            <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                        </div>
+                        <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
+                        <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET4</a>
+                        <div class="team-members">
+                            <!-- DB에서 값 받게끔 수정: 이름 -->
+                            <span>Junseo Lee</span>
+                            <span>염경훈</span>
+                            <span>진시우</span>
+                            <span>박민우</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="iPET.png">
+                    </a>
+                    <div class="textbox">
+                        <div class="tags">
+                            <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                        </div>
+                        <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
+                        <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET5</a>
+                        <div class="team-members">
+                            <!-- DB에서 값 받게끔 수정: 이름 -->
+                            <span>Junseo Lee</span>
+                            <span>염경훈</span>
+                            <span>진시우</span>
+                            <span>박민우</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="main-footer">
 
     </footer>
+</section>
 </body>
 
-<script src="/script.js"></script>
+<script type="text/javascript" src="/script.js"></script>
 </html>
