@@ -4,6 +4,12 @@
     padding:0;
 }
 
+body, div, p, span, em, small, a, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
 a {
     background-color: transparent;
     color: inherit;
@@ -13,12 +19,6 @@ a {
 
 a:visited {
     color: inherit;
-}
-
-body, div, p, span, em, small, a, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
 }
 
 img {
@@ -98,6 +98,29 @@ body, input, select, button, textarea {
     url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot?#iefix) format('embedded-opentype'),
     url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Bold-Hestia.woff) format('woff'),
     url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Bold-Hestia.otf) format('opentype');
+}
+
+.btn, a.btn {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.btn-font-400, a.btn.btn-font-400 {
+    font-weight: 400;
+}
+
+.btn.btn-size-1, a.btn.btn-size-1 {
+    height: 100%;
+    padding: 0px 1.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
 }
 
 html {
@@ -524,32 +547,4 @@ li {
 .swiper-button-next {
     background-image: url("arr-right-circle.png");
     background-color: transparent;
-}
-
-
-.main-footer {
-    margin-top: 30px;
-}
-
-
-/* For Responsive Web Design */
-@media (max-width: 1320px) {
-    .main-header {
-        padding-left: 0; /* Minimum padding */
-        padding-right: 0;
-    }
-}
-
-/* Apply the same dynamic padding logic to .slide-main and .proj-overview-container */
-.slide-main, .proj-overview-container {
-    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
-    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
-}
-
-
-@media (max-width: 1320px) {
-    .slide-main, .proj-overview-container {
-        padding-left: 0; /* Minimum padding */
-        padding-right: 0;
-    }
 }
