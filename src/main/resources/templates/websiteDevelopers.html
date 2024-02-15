@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="websiteDevelopers.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
 
     <link rel="icon" type="image/x-icon" href="logo.png">
 
@@ -17,32 +19,7 @@
 <body>
 <section id="container" class="page-index">
     <!-- Header -->
-    <header id="header" class="main-header">
-        <div class="logo-container">
-            <a href="/"><img src="logo.png" alt="KCU LOGO" class="logo"></a>
-            <a href="/">KCU</a>
-        </div>
-        <nav id="gnbWrap">
-            <ul class="gnb">
-                <li>
-                    <a href="">About</a>
-                    <div class="sub-wrap">
-                        <ul>
-                            <li><a href="/aboutkcu">About KCU</a></li>
-                            <li><a href="/leaders">Leaders</a></li>
-                            <li><a href="/developers">Website Developers</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="/getinvolved">Get Involved</a>
-                </li>
-                <li>
-                    <a href="/projects">Projects</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <div th:insert="header :: head"></div>
 
     <section class="developers-section">
         <div class="developers-title">
@@ -123,25 +100,7 @@
     </section>
 
     <!-- Footer -->
-    <section>
-        <footer>
-            <div class="footer-container">
-                <div class="footer-logo">
-                    <img src="logo.png" class="footer-logo-img">
-                </div>
-                <div class="footer-content">
-                    <h4>Korean Undergraduate Computer Science Union<br>at University of Wisconsin - Madison</h4>
-                    <p>Instagram: <a href="https://www.instagram.com/kcu_madison/" target="_blank">@kcu_madison</a></p>
-                    <p>LinkTree: <a href="https://linktr.ee/kcu1" target="_blank">linktr.ee/kcu1</a></p>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>Copyright &copy; KCU All Rights Reserved.</p>
-            </div>
-
-        </footer>
-    </section>
+    <div th:insert="footer :: foot"></div>
 </section>
 </body>
 

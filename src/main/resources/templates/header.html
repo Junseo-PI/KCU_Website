@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html>
-<header class="main-header">
-  <div class="logo-container">
-    <a href="/"><img src="logo.png" alt="KCU LOGO" class="logo"></a>
-    <a href="/">KCU</a>
+<body>
+  <div th:fragment="head">
+    <header id="header" class="main-header">
+      <div class="logo-container">
+        <a href="/"><img src="logo.png" alt="KCU LOGO" class="logo"></a>
+        <a href="/">KCU</a>
+      </div>
+      <nav id="gnbWrap">
+        <ul class="gnb">
+          <li>
+            <a href="">About</a>
+            <div class="sub-wrap">
+              <ul>
+                <li><a href="/aboutkcu">About KCU</a></li>
+                <li><a href="/leaders">Leaders</a></li>
+                <li><a href="/developers">Website Developers</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="/getinvolved">Get Involved</a>
+          </li>
+          <li>
+            <a href="/projects">Projects</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
   </div>
-  <nav id="gnbWrap">
-    <ul class="gnb">
-      <li>
-        <a href="">About</a>
-        <div class="sub-wrap">
-          <ul>
-            <li><a href="/aboutkcu">About KCU</a></li>
-            <li><a href="/leaders">Leaders</a></li>
-            <li><a href="/developers">Website Developers</a></li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <a href="/getinvolved">Get Involved</a>
-      </li>
-      <li>
-        <a href="/projects">Projects</a>
-      </li>
-    </ul>
-  </nav>
-</header>
+</body>
 </html>
