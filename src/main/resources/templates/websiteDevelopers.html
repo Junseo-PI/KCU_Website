@@ -1,10 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to KCU!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="websiteDevelopers.css">
 
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+<section id="container" class="page-index">
+    <!-- Header -->
+    <header id="header" class="main-header">
+        <div class="logo-container">
+            <a href="/"><img src="logo.png" alt="KCU LOGO" class="logo"></a>
+            <a href="/">KCU</a>
+        </div>
+        <nav id="gnbWrap">
+            <ul class="gnb">
+                <li>
+                    <a href="">About</a>
+                    <div class="sub-wrap">
+                        <ul>
+                            <li><a href="/aboutkcu">About KCU</a></li>
+                            <li><a href="/leaders">Leaders</a></li>
+                            <li><a href="/developers">Website Developers</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="/getinvolved">Get Involved</a>
+                </li>
+                <li>
+                    <a href="/projects">Projects</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Footer -->
+    <section>
+        <footer>
+            <!-- Have no idea why it doesn't work when I move this code to styles.css -->
+            <style>
+                footer{
+                    margin-top: 3rem;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: #e2e2e2;
+                    height: auto;
+                    width: 100vw;
+                    padding-top: 1rem;
+                    color: #000;
+                }
+                .footer-content{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: left;
+
+                    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+                    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+                }
+                .footer-content h4{
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    line-height: 2rem;
+                }
+                .footer-content p{
+                    max-width: 500px;
+                    line-height: 28px;
+                    font-size: 14px;
+                    color: #000;
+                }
+
+                .footer-bottom{
+                    width: 100vw;
+                    padding: 20px;
+                    padding-bottom: 1rem;
+
+                    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+                    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                }
+                .footer-bottom p{
+                    font-size: 14px;
+                    word-spacing: 2px;
+                    text-transform: capitalize;
+                    color: #777777;
+                }
+            </style>
+
+            <div class="footer-content">
+                <h4>Korean Undergraduate Computer Science Union<br>at University of Wisconsin - Madison</h4>
+                <p>Instagram: <a href="https://www.instagram.com/kcu_madison/" target="_blank">@kcu_madison</a></p>
+                <p>LinkTree: <a href="https://linktr.ee/kcu1" target="_blank">linktr.ee/kcu1</a></p>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; KCU All Rights Reserved.</p>
+            </div>
+
+        </footer>
+    </section>
+</section>
 </body>
+
+<script type="text/javascript" src="/script.js"></script>
 </html>
