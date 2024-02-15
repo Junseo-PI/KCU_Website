@@ -175,7 +175,8 @@ html {
 }
 
 .logo {
-    max-height: 80px;
+    max-height: 70px;
+    margin-right: 5px;
     width: auto;
 }
 
@@ -268,285 +269,6 @@ html {
     color: #90BEEC; /* This sets the text color to blue on hover */
 }
 
-.slide-main {
-    position: relative;
-    z-index: 1; /* Optional, ensures .slide-main has a lower stacking context than .sub-wrap */
-}
-
-/* Slider for Banner */
-.slide {
-    /* layout */
-    display: flex;
-    flex-wrap: nowrap;
-    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
-    overflow: hidden;
-
-    /* position */
-    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
-    position: relative;
-
-    /* size */
-    width: 100%;
-
-    /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
-    user-select: none;
-}
-.slide_item {
-    /* layout */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
-    position: relative;
-    left: 0px;
-
-    /* size */
-    width: 100%;
-    height: 450px;
-    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
-    flex-shrink: 0;
-
-    /* transition */
-    transition: left 0.3s, width 0.3s;
-}
-.slide_button {
-    /* layout */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* position */
-    position: absolute;
-    top: calc(50% - 16px); /* Center vertically */
-
-    /* size */
-    width: 36px;
-    height: 36px;
-
-    /* style */
-    background-size: cover;
-    cursor: pointer;
-    z-index: 2; /* Ensure it's above the slide items */
-}
-
-.slide_prev_button {
-    left: 0;
-    background-image: url("arr-left-circle.png");
-    background-color: transparent;
-}
-
-.slide_next_button {
-    right: 0;
-    background-image: url("arr-right-circle.png");
-    background-color: transparent;
-}
-
-/* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
-.slide_item.item1 {
-    background:url("mokup3.png")
-}
-.slide_item.item2 {
-    background:url("mokup4.png")
-}
-.slide_item.item3 {
-    background-color: blueviolet;
-}
-.slide_item.item4 {
-    background-color: burlywood;
-}
-.slide_item.item5 {
-    background-color: cornflowerblue;
-}
-
-/* 페이지네이션 스타일 */
-ul,
-li {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-.slide_pagination {
-    /* layout */
-    display: flex;
-    gap: 5px;
-
-    /* position */
-    position: absolute;
-    bottom: 0;
-    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
-    left: 50%;
-    transform: translateX(-50%);
-}
-.slide_pagination > li {
-    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
-    color: #7fb5ff88;
-    cursor: pointer;
-    font-size: 25px;
-}
-.slide_pagination > li.active {
-    /* 현재 슬라이드 색상은 투명도 없이 */
-    color: #7fb5ff;
-}
-
-.slide_item_duplicate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: 0px;
-    width: 100%;
-    height: 300px;
-    flex-shrink: 0;
-    transition: left 0.15s;
-}
-
-/* Projects overview  */
-.projects-overview-carousel {
-    position: relative;
-    margin-top: 3rem;
-}
-
-.projects-overview-carousel {
-    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
-    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
-}
-
-.overview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.proj-overview-title .title {
-    font-size: 1.8rem;
-    line-height: 4rem;
-    font-weight: 500;
-}
-
-.btn.btn-blue, a.btn.btn-blue {
-    background-color: #90BEEC;
-    color: #ffffff;
-}
-
-.swiper img {
-    max-width: 100%;
-}
-
-.projects-overview-carousel .swiper-slide {
-    width: 100%;
-    height: 100%;
-    border: 1px solid rgb(180, 180, 180);
-}
-
-.projects-overview-carousel .swiper-slide .textbox {
-    padding: 0.5rem 0.5rem 0px;
-    border-top: 1px solid rgb(180, 180, 180);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.tags {
-    line-height: 1.6rem;
-}
-
-.tags > span {
-    display: inline-block;
-    margin-right: 0.5rem;
-    padding: 0px 1rem;
-    background-color: rgb(255, 255, 255);
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 1rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    vertical-align: center;
-}
-
-.tags > span:last-child {
-    margin-right: 0px;
-}
-
-.swiper-slide .textbox .title {
-    display: block;
-    margin-top: 0.2rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 2.4rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.swiper-slide .textbox .team-members {
-    display: block;
-    font-size: 1rem;
-    line-height: 2rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.swiper-slide .textbox .team-members > span {
-    position: relative;
-    display: inline-block;
-    margin-right: 0.1rem;
-    padding-right: 0.5rem;
-}
-
-.swiper-slide .textbox .team-members > span::after {
-    position: absolute;
-    top: 50%;
-    right: 0px;
-    display: block;
-    width: 1px;
-    height: 1rem;
-    margin-top: -0.5rem;
-    background: rgb(0, 0, 0);
-    content: "";
-}
-
-.swiper-slide .textbox .team-members > span:last-child::after {
-    display: none;
-}
-
-.swiper-button-prev, .swiper-button-next {
-    /* layout */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* position */
-    position: absolute;
-    top: calc(50% - 16px); /* Center vertically */
-
-    /* size */
-    width: 36px;
-    height: 36px;
-
-    /* style */
-    background-size: cover;
-    cursor: pointer;
-    z-index: 2; /* Ensure it's above the slide items */
-
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-    display: none;
-}
-
-.swiper-button-prev {
-    background-image: url("arr-left-circle.png");
-    background-color: transparent;
-}
-
-.swiper-button-next {
-    background-image: url("arr-right-circle.png");
-    background-color: transparent;
-}
-
 footer{
     margin-top: 3rem;
     bottom: 0;
@@ -558,13 +280,31 @@ footer{
     padding-top: 1rem;
     color: #000;
 }
+
+.footer-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    gap: 20px;
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+}
+
+.footer-logo {
+    display: flex;
+    flex: 0 0 250px;
+    height: 250px;
+    overflow: hidden;
+}
+
 .footer-content{
     display: flex;
     flex-direction: column;
     justify-content: left;
-
-    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
-    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    flex-grow: 1;
+    max-width: calc(100% - 270px);
 }
 .footer-content h4{
     font-size: 1.6rem;
@@ -580,11 +320,7 @@ footer{
 
 .footer-bottom{
     width: 100vw;
-    padding: 20px;
     padding-bottom: 1rem;
-
-    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
-    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
 
     align-items: center;
     justify-content: center;
@@ -596,4 +332,101 @@ footer{
     word-spacing: 2px;
     text-transform: capitalize;
     color: #777777;
+}
+
+.developers-section {
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+}
+
+.developers-title {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.developers-title h1{
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+.about-developers {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-top: 2rem;
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+.developer-image {
+    display: flex;
+    flex: 0 0 250px;
+    height: 250px;
+    border-radius: 70%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.developer-image .profile {
+    object-fit: cover;
+}
+
+.developer-contents {
+    flex-grow: 1;
+    max-width: calc(100% - 270px);
+}
+
+.developer-contents .developer-name {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 1rem;
+}
+
+.developer-contents .developer-role {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+}
+
+.developer-contents .developer-role > span {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.1rem;
+    padding-right: 0.5rem;
+}
+
+.developer-contents .developer-role > span::after {
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    display: block;
+    width: 1px;
+    height: 1.3rem;
+    margin-top: -0.5rem;
+    background: rgb(0, 0, 0);
+    content: "";
+}
+
+.developer-contents .developer-role > span:last-child::after {
+    display: none;
+}
+
+.developer-contents .developer-description {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2rem;
+    text-overflow: ellipsis;
+    margin-bottom: 0.1rem;
 }
