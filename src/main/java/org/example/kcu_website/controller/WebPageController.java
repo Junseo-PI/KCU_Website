@@ -36,4 +36,9 @@ public class WebPageController {
     return "projects";
   }
 
+  @GetMapping("/login")
+  public String login() {
+    return "login";
+  }
+
 }

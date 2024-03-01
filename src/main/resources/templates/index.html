@@ -19,7 +19,7 @@
 <body>
     <section id="container" class="page-index">
         <!-- Header -->
-        <div th:insert="header :: head"></div>
+        <div th:insert="~{header :: head}"></div>
 
         <!-- Banner -->
         <div class="slide-main">
@@ -56,7 +56,7 @@
                         </a>
                         <div class="textbox">
                             <div class="tags">
-                                <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                                <span style="color:#ea6262; border-color:#ea6262;">Advanced</span>
                             </div>
                             <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
                             <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET1</a>
@@ -76,7 +76,7 @@
                         </a>
                         <div class="textbox">
                             <div class="tags">
-                                <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                                <span style="color:#fabd3b; border-color:#fabd3b;">Intermediate</span>
                             </div>
                             <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
                             <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET2</a>
@@ -96,7 +96,7 @@
                         </a>
                         <div class="textbox">
                             <div class="tags">
-                                <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                                <span style="color:#9dda8d; border-color:#9dda8d;">Novice</span>
                             </div>
                             <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
                             <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET3</a>
@@ -116,7 +116,7 @@
                         </a>
                         <div class="textbox">
                             <div class="tags">
-                                <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                                <span style="color:#EA6262; border-color:#EA6262;">Advanced</span>
                             </div>
                             <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
                             <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET4</a>
@@ -136,7 +136,7 @@
                         </a>
                         <div class="textbox">
                             <div class="tags">
-                                <span style="color:#90BEEC; border-color:#90BEEC;">Advanced</span>
+                                <span style="color:#EA6262; border-color:#EA6262;">Advanced</span>
                             </div>
                             <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
                             <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET5</a>
@@ -157,7 +157,7 @@
         </section>
 
         <!-- Footer -->
-        <div th:insert="footer :: foot"></div>
+        <div th:insert="~{footer :: foot}"></div>
     </section>
 </body>
 

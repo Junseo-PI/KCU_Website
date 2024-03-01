@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to KCU!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="websiteDevelopers.css">
     <link rel="stylesheet" href="header.css">
@@ -19,7 +18,7 @@
 <body>
 <section id="container" class="page-index">
     <!-- Header -->
-    <div th:insert="header :: head"></div>
+    <div th:insert="~{header :: head}"></div>
 
     <section class="developers-section">
         <div class="developers-title">
@@ -39,7 +38,7 @@
                         Backend Developer
                     </span>
                     <span>
-                        <a href="mailto:lee2386@wisc.edu">lee2386@wisc.edu</a>
+                        <a href="mailto:dkim762@wisc.edu">dkim762@wisc.edu</a>
                     </span>
                 </div>
                 <div class="developer-description">
@@ -63,7 +62,7 @@
                         Frontend Developer
                     </span>
                     <span>
-                        <a href="mailto:lee2386@wisc.edu">echoi54@wisc.edu</a>
+                        <a href="mailto:echoi54@wisc.edu">echoi54@wisc.edu</a>
                     </span>
                 </div>
                 <div class="developer-description">
@@ -100,7 +99,7 @@
     </section>
 
     <!-- Footer -->
-    <div th:insert="footer :: foot"></div>
+    <div th:insert="~{footer :: foot}"></div>
 </section>
 </body>
 

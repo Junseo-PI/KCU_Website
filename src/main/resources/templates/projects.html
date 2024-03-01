@@ -1,10 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to KCU!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="projects.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
+
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 </head>
 <body>
+    <section id="container" class="page-index">
+        <!-- Header -->
+        <div th:insert="~{header :: head}"></div>
 
+        <section class="projects-section">
+            <div class="projects-title">
+                <h1>Projects</h1>
+            </div>
+
+            <div class="selectbox-container">
+                <div class="select">
+                    <select>
+                        <option value="1" selected>SP24</option>
+                        <option value="2">FA23</option>
+                        <option value="3">SP23</option>
+                        <option value="4">FA23</option>
+                        <option value="5">SP22</option>
+                        <option value="6">FA22</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="projects-overview">
+                <div class="project-image">
+                    <a href="/projects/ipet1"><img src="images/iPET.png" class="projimage"></a>
+                </div>
+                <div class="project-contents">
+                    <div class="project-name">
+                        <a href="/projects/ipet1">iPET1</a>
+                    </div>
+                    <div class="project-difficulty-language">
+                        <span style="color:#EA6262; border-color:#EA6262;">
+                            Advanced
+                        </span>
+                        <span>
+                            C++, Java, Arduino, Android Studio
+                        </span>
+                    </div>
+                    <div class="project-description">
+                        <a>
+                            Introduce your project (Max 200 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi.
+                        </a>
+                    </div>
+                    <div class="project-participant-names">
+                        <a>
+                            김민우, 염경훈, 이준서, 진시우
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-overview">
+                <div class="project-image">
+                    <a href="/projects/ipet2"><img src="images/iPET.png" class="projimage"></a>
+                </div>
+                <div class="project-contents">
+                    <div class="project-name">
+                        <a href="/projects/ipet2">iPET2</a>
+                    </div>
+                    <div class="project-difficulty-language">
+                        <span style="color:#FADB3B; border-color:#FADB3B;">
+                            Intermediate
+                        </span>
+                        <span>
+                            C++, Java, Arduino, Android Studio
+                        </span>
+                    </div>
+                    <div class="project-description">
+                        <a>
+                            Introduce your project (Max 200 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi.
+                        </a>
+                    </div>
+                    <div class="project-participant-names">
+                        <a>
+                            김민우, 염경훈, 이준서, 진시우
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-overview">
+                <div class="project-image">
+                    <a href="/projects/ipet3"><img src="images/iPET.png" class="projimage"></a>
+                </div>
+                <div class="project-contents">
+                    <div class="project-name">
+                        <a href="/projects/ipet3">iPET3</a>
+                    </div>
+                    <div class="project-difficulty-language">
+                        <span style="color:#9DDA8D; border-color:#9DDA8D;">
+                            Novice
+                        </span>
+                        <span>
+                            C++, Java, Arduino, Android Studio
+                        </span>
+                    </div>
+                    <div class="project-description">
+                        <a>
+                            Introduce your project (Max 200 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi.
+                        </a>
+                    </div>
+                    <div class="project-participant-names">
+                        <a>
+                            김민우, 염경훈, 이준서, 진시우
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-overview">
+                <div class="project-image">
+                    <a href="/projects/ipet4"><img src="images/iPET.png" class="projimage"></a>
+                </div>
+                <div class="project-contents">
+                    <div class="project-name">
+                        <a href="/projects/ipet4">iPET4</a>
+                    </div>
+                    <div class="project-difficulty-language">
+                        <span style="color:#EA6262; border-color:#EA6262;">
+                            Advanced
+                        </span>
+                        <span>
+                            C++, Java, Arduino, Android Studio
+                        </span>
+                    </div>
+                    <div class="project-description">
+                        <a>
+                            Introduce your project (Max 200 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi.
+                        </a>
+                    </div>
+                    <div class="project-participant-names">
+                        <a>
+                            김민우, 염경훈, 이준서, 진시우
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-overview">
+                <div class="project-image">
+                    <a href="/projects/ipet5"><img src="images/iPET.png" class="projimage"></a>
+                </div>
+                <div class="project-contents">
+                    <div class="project-name">
+                        <a href="/projects/ipet5">iPET5</a>
+                    </div>
+                    <div class="project-difficulty-language">
+                        <span style="color:#EA6262; border-color:#EA6262;">
+                            Advanced
+                        </span>
+                        <span>
+                            C++, Java, Arduino, Android Studio
+                        </span>
+                    </div>
+                    <div class="project-description">
+                        <a>
+                            Introduce your project (Max 200 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi.
+                        </a>
+                    </div>
+                    <div class="project-participant-names">
+                        <a>
+                            김민우, 염경훈, 이준서, 진시우
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div th:insert="~{footer :: foot}"></div>
+    </section>
 </body>
+
+<script type="text/javascript" src="/script.js"></script>
 </html>

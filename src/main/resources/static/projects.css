@@ -1,0 +1,297 @@
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+body, div, p, span, em, small, a, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+a {
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+img {
+    vertical-align: top;
+}
+
+body, input, select, button, textarea {
+    color: rgb(0, 0, 0);
+    font-family: "Noto Sans KR", "Noto Sans CJK KR", "Noto Sans", "Apple SD Gothic Neo", "애플 SD 산돌고딕 Neo", AppleGothic, "New Roboto", Roboto, -apple-system, system, BlinkMacSystemFont, "SF UI Text", "SF Pro Text", BlinkMacSystemFont, "Nanum Gothic", "나눔 고딕", "Malgun Gothic", "맑은 고딕", Dotum, 돋움, Gullim, 굴림, "droid sans fallback", "Droid Sans", "Segoe UI", "helvetica neue", Tahoma, "Microsoft Sans Serif", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.btn, a.btn {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.btn-font-400, a.btn.btn-font-400 {
+    font-weight: 400;
+}
+
+.btn.btn-size-1, a.btn.btn-size-1 {
+    height: 100%;
+    padding: 0px 1.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 300;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Light-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Light-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Light-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Light-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 400;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Regular-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Regular-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Regular-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Regular-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 500;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Medium-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Medium-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Medium-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Medium-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 700;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Bold-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Bold-Hestia.otf) format('opentype');
+}
+
+.btn, a.btn {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.btn-font-400, a.btn.btn-font-400 {
+    font-weight: 400;
+}
+
+.btn.btn-size-1, a.btn.btn-size-1 {
+    height: 100%;
+    padding: 0px 1.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+
+html {
+    line-height: 1.5;
+    text-size-adjust: none;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.projects-section {
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+}
+
+.projects-title {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.projects-title h1{
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+select {
+    /* Reset Select */
+    appearance: none;
+    outline: 10px solid red;
+    border: 1px solid;
+    box-shadow: none;
+    /* Personalize */
+    width: 100%;
+    flex: 1;
+    padding: 0 1rem;
+    color: #000;
+    background: transparent;
+    line-height: 2.5rem;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+    display: none;
+}
+/* Custom Select wrapper */
+.select {
+    position: relative;
+    display: flex;
+    width: 10rem;
+    height: 3rem;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+/* Arrow */
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: .5rem;
+    transform: translateY(-50%);
+    padding: 0 1rem;
+    transition: .25s all ease;
+    pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+    color: #90BEEC;
+}
+
+/* 가운데정렬 - position,transform*/
+.selectbox-container {
+    position: relative;
+}
+
+.down_note {
+    display: flex;
+    justify-content: center;
+}
+
+.projects-overview {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}
+
+.project-image {
+    display: flex;
+    flex: 0 0 250px;
+    height: 250px;
+    width: 250px;
+    overflow: hidden;
+    margin-right: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.project-image .projimage {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.project-contents {
+    flex-grow: 1;
+    max-width: calc(100% - 270px);
+}
+
+.project-name {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 1rem;
+}
+
+.project-difficulty-language {
+    display: block;
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+}
+
+.project-difficulty-language > span {
+    position: relative;
+    display: inline-block;
+    margin-right: 0.1rem;
+    padding-right: 0.5rem;
+}
+
+.project-difficulty-language > span::after {
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    display: block;
+    width: 1px;
+    height: 1rem;
+    margin-top: -0.5rem;
+    background: rgb(0, 0, 0);
+    content: "";
+}
+
+.project-difficulty-language > span:last-child::after {
+    display: none;
+}
+
+.project-description {
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 2rem;
+    text-overflow: ellipsis;
+    margin-bottom: 0.1rem;
+}
+
+.project-participant-names {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 2rem;
+    text-overflow: ellipsis;
+    margin-bottom: 0.1rem;
+}
