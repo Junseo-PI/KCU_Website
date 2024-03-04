@@ -36,6 +36,11 @@ public class WebPageController {
     return "projects";
   }
 
+  @GetMapping("/projects/ipet1")
+  public String projectDetail() {
+    return "projectDetail";
+  }
+
   @GetMapping("/login")
   public String login() {
     return "login";

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to KCU!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/projectDetail.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/footer.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+    <section id="container" class="page-index">
+        <!-- Header -->
+        <div th:insert="~{header :: head}"></div>
+
+        <section class="project-detail-section">
+            <div class="project-content-wrapper">
+                <div class="content-left">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="/images/iPET.png">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/iPET2.jpg">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/iPET3.jpg">
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div class="content-right">
+                    <div class="category">
+                        <a class="semester-category" data-ga-action="클릭" data-ga-label="SP24" href="/projects">
+                            <span aria-label="학기">SP24</span>
+                        </a>
+                    </div>
+                    <hr class="divider">
+                    <p class="right-project-title">스마트 DIY 애견 급식기 - iPET(아이펫)</p>
+                    <p class="right-project-light-description">애완동물을 사랑하는 당신, 긴 외출이나 여행 때 마다 고민하셨죠? 여기 애완동물을 사랑하는 스마트한 방법을 알려드리겠습니다.</p>
+                    <div class="right-project-participants">
+                        <div class="right-each-participant">
+                            <div class="each-participant-name">
+                                <p>박민우</p>
+                            </div>
+                            <div class="each-participant-role-email">
+                                <span>
+                                    하드웨어 개발
+                                </span>
+                                <span>
+                                    <a href="mailto:lee2386@wisc.edu">lee2386@wisc.edu</a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="right-each-participant">
+                            <div class="each-participant-name">
+                                <p>염경훈</p>
+                            </div>
+                            <div class="each-participant-role-email">
+                                <span>
+                                    하드웨어 개발
+                                </span>
+                                <span>
+                                    <a href="mailto:lee2386@wisc.edu">lee2386@wisc.edu</a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="right-each-participant">
+                            <div class="each-participant-name">
+                                <p>이준서</p>
+                            </div>
+                            <div class="each-participant-role-email">
+                                <span>
+                                    아두이노 개발
+                                </span>
+                                <span>
+                                    <a href="mailto:lee2386@wisc.edu">lee2386@wisc.edu</a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="right-each-participant">
+                            <div class="each-participant-name">
+                                <p>진시우</p>
+                            </div>
+                            <div class="each-participant-role-email">
+                                <span>
+                                    앱 개발
+                                </span>
+                                <span>
+                                    <a href="mailto:lee2386@wisc.edu">lee2386@wisc.edu</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-git">
+                        <button class="btn project-git-button btn-primary" type="button" onclick="window.open('https://github.com/Junseo-PI/KCU_Website', '_blank')">
+                            <span class="button-children">
+                                <p>GitHub Link</p>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-description">
+                <p>Smart Love for Your Pet - 마이펫, 스마트하게 사랑하기</p>
+                <p>WHY: 가족 여행 갈 때마다 이런 생각 하시죠? "강아지 밥은 어떻게 하지?"</p>
+                <p>SOLUTION: 이제 iPET에게 맡겨두세요.</p>
+                <p><br>자동 블루투스 연결, 단순하고 쉬운 앱 컨트롤로 아이도 노인도 쉽게 사용할 수 있어요!</p>
+                <p><br>급식 예약: 하루 최대 7회까지 급식 예약 가능</p>
+                <p>급여량 설정: 최소 18g ~ 최대 162g, 9단계 설정 가능</p>
+                <p>부가 기능: 바로 밥주기, iPET 자동 청소 등</p>
+                <p><br>iPET 앱은 애플 앱스토어, 구글 플레이스토어에서 무료로 다운받으실 수 있습니다.<br>현재 개발 마무리 단계에 있으며, 10월초 출시될 예정입니다.</p>
+                <p><br>마이펫, 스마트하게 사랑하기. iPET으로 시작하세요.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div th:insert="~{footer :: foot}"></div>
+    </section>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+</body>
+
+<script type="text/javascript" src="/script.js"></script>
+</html>
