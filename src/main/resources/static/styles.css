@@ -330,6 +330,13 @@ li {
     margin-right: 0px;
 }
 
+.swiper-slide * {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
 .swiper-slide .textbox .title {
     display: block;
     margin-top: 0.2rem;

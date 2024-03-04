@@ -148,6 +148,35 @@
                 prevEl: ".swiper-button-prev",
             },
         });
+
+        // js가 load가 안 돼서 우선 html에 js코드 작성. 추후 고칠 예정
+        // Header 구현
+        const gnbLi = document.querySelectorAll('.gnb > li');
+        const subMenu = document.querySelectorAll('.sub-wrap');
+
+        for(let i = 0; i < gnbLi.length; i++){
+            gnbLi[i].addEventListener('mouseover', function() {
+                subMenu[i].classList.add('active');
+            });
+        }
+
+        for(let i = 0; i < gnbLi.length; i++){
+            gnbLi[i].addEventListener('mouseleave', function() {
+                subMenu[i].classList.remove('active')
+            });
+        }
+
+        gnbLi.forEach((li, index) => {
+            li.addEventListener('mouseover', function() {
+                subMenu[index].classList.add('active');
+                document.querySelector('.main-header').classList.add('no-border');
+            });
+
+            li.addEventListener('mouseleave', function() {
+                subMenu[index].classList.remove('active');
+                document.querySelector('.main-header').classList.remove('no-border');
+            });
+        });
     </script>
 </body>
 
