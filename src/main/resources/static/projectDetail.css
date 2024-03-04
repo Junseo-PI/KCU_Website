@@ -301,3 +301,8 @@ html {
     font-weight: 400;
     line-height: 2.5rem;
 }
+
+.swiper-button-next, .swiper-button-prev {
+    --swiper-theme-color: #90BEEC;
+    color: var(#90BEEC,var(--swiper-theme-color));
+}
