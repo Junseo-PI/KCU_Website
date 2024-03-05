@@ -289,6 +289,7 @@ li {
 .btn.btn-blue, a.btn.btn-blue {
     background-color: #90BEEC;
     color: #ffffff;
+    border-radius: 10px;
 }
 
 .swiper img {

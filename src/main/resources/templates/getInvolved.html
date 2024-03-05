@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to KCU!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/getInvolved.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/footer.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
+    <section id="container" class="page-index">
+        <!-- Header -->
+        <div th:insert="~{header :: head}"></div>
 
+        <div class="getInvolved-section-open">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScrKK81hJIF0aQX6Lxf3VeM1fDIKND0SnxRk7ytTOSCIu5liQ/viewform" class="get-involved-form"></iframe>
+        </div>
+
+        <div class="getInvolved-section-closed">
+            <!-- 신청기간이 아닐 때에는 죄송합니다 현재 부원을 받고있지 않습니다와 같은 글 표시하기 -->
+        </div>
+
+        <!-- Footer -->
+        <div th:insert="~{footer :: foot}"></div>
+    </section>
 </body>
+
+<script type="text/javascript" src="/script.js"></script>
 </html>
