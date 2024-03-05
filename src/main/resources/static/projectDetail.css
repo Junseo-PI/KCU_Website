@@ -312,3 +312,18 @@ html {
     --swiper-theme-color: #90BEEC;
     color: var(#90BEEC,var(--swiper-theme-color));
 }
+
+.advanced {
+    color: #EA6262;
+    border-color: #EA6262;
+}
+
+.intermediate {
+    color: #FADB3B;
+    border-color: #FADB3B;
+}
+
+.novice {
+    color: #9DDA8D;
+    border-color: #9DDA8D;
+}

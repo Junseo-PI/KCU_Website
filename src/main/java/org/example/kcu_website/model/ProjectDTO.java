@@ -16,6 +16,7 @@ public class ProjectDTO {
   private String semesterName;
 
   private List<String> participantNames;
+  private List<Participant> participants;
 
   public Long getId() {
     return id;
@@ -95,5 +96,13 @@ public class ProjectDTO {
 
   public String getSemesterName() {
     return semesterName;
+  }
+
+  public void setParticipants(List<Participant> participants) {
+    this.participants = participants;
+  }
+
+  public List<Participant> getParticipants() {
+    return participants;
   }
 }
