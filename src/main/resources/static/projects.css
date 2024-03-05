@@ -299,3 +299,26 @@ select::-ms-expand {
     text-overflow: ellipsis;
     margin-bottom: 0.1rem;
 }
+
+.project-participant-names ul li {
+    display: inline-block;
+}
+
+.project-participant-names ul li:not(:last-child)::after {
+    content: ", ";
+}
+
+.advanced {
+    color: #EA6262;
+    border-color: #EA6262;
+}
+
+.intermediate {
+    color: #FADB3B;
+    border-color: #FADB3B;
+}
+
+.novice {
+    color: #9DDA8D;
+    border-color: #9DDA8D;
+}

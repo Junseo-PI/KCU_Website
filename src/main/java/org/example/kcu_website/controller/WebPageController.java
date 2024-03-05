@@ -31,10 +31,6 @@ public class WebPageController {
     return "getInvolved";
   }
 
-  @GetMapping("/projects")
-  public String projects() {
-    return "projects";
-  }
 
   @GetMapping("/projects/ipet1")
   public String projectDetail() {
