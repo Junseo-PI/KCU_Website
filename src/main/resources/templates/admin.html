@@ -1,10 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>KCU Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site Administration | KCU site admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminPage.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="branding">
+                <h1 class="site-name-big">
+                    <a href="/admin">KCU Administration</a>
+                </h1>
+            </div>
 
+            <div class="user-tools">
+                WELCOME, KCU ADMIN.
+                <a href="/">VIEW SITE</a>
+                /
+                <a href="/admin/logout">LOG OUT</a>
+            </div>
+        </div>
+        <!-- End Header -->
+        <!-- Content -->
+        <div class="content colM">
+            <h1>Site Administration</h1>
+            <div class="content-main">
+                <div class="app-auth module">
+                    <table>
+                        <caption>
+                            <a class="section">Authentication and Authorization</a>
+                        </caption>
+                        <tbody>
+                            <tr class="model-user">
+                                <th scope="row">
+                                    <a href="/admin/user/">Users</a>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="app-db module">
+                    <table>
+                        <caption>
+                            <a class="section">KCU Database</a>
+                        </caption>
+                        <tbody>
+                            <tr class="model-semester">
+                                <th scope="row">
+                                    <a href="/admin/semesters/">Semesters</a>
+                                </th>
+                            </tr>
+                            <tr class="model-project">
+                                <th scope="row">
+                                    <a href="/admin/projects/">Projects</a>
+                                </th>
+                            </tr>
+                            <tr class="model-participant">
+                                <th scope="row">
+                                    <a href="/admin/participants/">Participants</a>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- END Content -->
+    </div>
 </body>
 </html>

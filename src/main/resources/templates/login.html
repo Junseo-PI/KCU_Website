@@ -1,10 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in | KCU site admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminPage.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-
+    <section class="login-container">
+        <div class="login">
+            <!-- Header -->
+            <div class="header">
+                <div class="branding">
+                    <h1 class="site-name">
+                        <a href="/admin">KCU Super Administration Site</a>
+                    </h1>
+                </div>
+            </div>
+            <!-- END Header -->
+            <!-- Content -->
+            <div class="content colM">
+                <div class="content-main">
+                    <form class="login-form" action="/login" method="post">
+                        <div class="form-row">
+                            <label class="required" for="id_username">UserId:</label>
+                            <input id="id_username" autofocus="" maxlength="254" name="username" type="text" required="">
+                        </div>
+                        <div class="form-row">
+                            <label class="required" for="id_password">Password:</label>
+                            <input id="id_password" name="password" type="password" required="">
+                        </div>
+                        <div class="submit-row">
+                            <label></label>
+                            <input type="submit" value="Log in">
+                        </div>
+                    </form>
+                </div>
+                <br class="clear">
+            </div>
+            <!-- END Content -->
+            <div class="footer"></div>
+        </div>
+        <!-- END Container -->
+    </section>
 </body>
 </html>
