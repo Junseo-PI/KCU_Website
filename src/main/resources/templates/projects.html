@@ -35,7 +35,9 @@
 
             <div th:each="projectDTO : ${projectDTOs}" class="projects-overview">
                 <div th:href="@{/projects/{semesterName}/{projectId}(semesterName=${semesterName}, projectId=${projectDTO.id})}" class="project-image">
-                    <a th:href="@{/projects/{semesterName}/{projectId}(semesterName=${semesterName}, projectId=${projectDTO.id})}"><img src="/images/iPET.png" class="projimage"></a>
+                    <a th:href="@{/projects/{semesterName}/{projectId}(semesterName=${semesterName}, projectId=${projectDTO.id})}">
+                        <img th:src="${projectDTO.images_link1}" class="projimage">
+                    </a>
                 </div>
                 <div class="project-contents">
                     <div class="project-name">

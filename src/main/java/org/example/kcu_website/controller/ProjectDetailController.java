@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +39,19 @@ public class ProjectDetailController {
       dto.setLongDescription(project.getLongDescription());
       dto.setSemesterId(project.getSemesterId());
       dto.setSemesterName(semesterName);
+
+      ArrayList<String> imageLinks = new ArrayList<>();
+      imageLinks.add(project.getImages_link1());
+
+      if (project.getImages_link2() != null) {
+        imageLinks.add(project.getImages_link2());
+      }
+
+      if (project.getImages_link3() != null) {
+        imageLinks.add(project.getImages_link3());
+      }
+
+      dto.setImagesLink(imageLinks);
 
       if (!project.getGithubLink().contains("http")) {
         dto.setGithubLink("https://" + project.getGithubLink());

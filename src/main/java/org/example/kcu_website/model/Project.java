@@ -19,12 +19,15 @@ public class Project {
   private String shortDescription;
   private String githubLink;
   private String longDescription;
+  private String images_link1;
+  private String images_link2;
+  private String images_link3;
 
   public Project() {
 
   }
 
-  public Project(Long id, Long semesterId, String level, String languagesPlatforms, String name, String shortDescription, String githubLink, String longDescription) {
+  public Project(Long id, Long semesterId, String level, String languagesPlatforms, String name, String shortDescription, String githubLink, String longDescription, String images_link1, String images_link2, String images_link3) {
     this.id = id;
     this.semesterId = semesterId;
     this.level = level;
@@ -33,6 +36,9 @@ public class Project {
     this.shortDescription = shortDescription;
     this.githubLink = githubLink;
     this.longDescription = longDescription;
+    this.images_link1 = images_link1;
+    this.images_link2 = images_link2;
+    this.images_link3 = images_link3;
   }
 
   public Long getId() {
@@ -99,5 +105,27 @@ public class Project {
     this.longDescription = longDescription;
   }
 
+  public void setImages_link1(String images_link1) {
+    this.images_link1 = images_link1;
+  }
 
+  public void setImages_link2(String images_link2) {
+    this.images_link2 = images_link2;
+  }
+
+  public void setImages_link3(String images_link3) {
+    this.images_link3 = images_link3;
+  }
+
+  public String getImages_link1() {
+    return images_link1;
+  }
+
+  public String getImages_link2() {
+    return images_link2;
+  }
+
+  public String getImages_link3() {
+    return images_link3;
+  }
 }

@@ -55,6 +55,7 @@ public class ProjectsController {
         dto.setLongDescription(project.getLongDescription());
         dto.setShortDescription(project.getShortDescription());
         dto.setSemesterName(semester.getSemesterName());
+        dto.setImages_link1(project.getImages_link1());
 
         List<Participant> participants = participantRepository.findByProjectId(project.getId());
         List<String> participantNames = participants.stream()

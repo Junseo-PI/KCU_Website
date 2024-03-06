@@ -2,6 +2,8 @@ package org.example.kcu_website.model;
 
 import jakarta.persistence.Column;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDTO {
@@ -17,6 +19,8 @@ public class ProjectDTO {
 
   private List<String> participantNames;
   private List<Participant> participants;
+  private String images_link1;
+  private ArrayList<String> imagesLink;
 
   public Long getId() {
     return id;
@@ -104,5 +108,21 @@ public class ProjectDTO {
 
   public List<Participant> getParticipants() {
     return participants;
+  }
+
+  public void setImages_link1(String images_link1) {
+    this.images_link1 = images_link1;
+  }
+
+  public String getImages_link1() {
+    return images_link1;
+  }
+
+  public void setImagesLink(ArrayList<String> imagesLink) {
+    this.imagesLink = imagesLink;
+  }
+
+  public ArrayList<String> getImagesLink() {
+    return imagesLink;
   }
 }

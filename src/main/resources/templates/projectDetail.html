@@ -26,14 +26,8 @@
                 <div class="content-left">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="/images/iPET.png">
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="/images/iPET2.jpg">
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="/images/iPET3.jpg">
+                            <div class="swiper-slide" th:each="imageLink : ${projectDTO.imagesLink}">
+                                <img th:src="${imageLink}">
                             </div>
                         </div>
                         <div class="swiper-button-next"></div>
