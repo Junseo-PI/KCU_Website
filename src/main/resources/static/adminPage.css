@@ -299,3 +299,120 @@ th {
     vertical-align: top;
     padding: 8px;
 }
+
+.breadcrums {
+    background: #79AEC8;
+    padding: 10px 40px;
+    border: none;
+    font-size: 14px;
+    color: #C4DCE8;
+    text-align: left;
+}
+
+.breadcrums a {
+    color: #fff;
+}
+
+.object-tools {
+    font-size: 10px;
+    font-weight: bold;
+    padding-left: 0;
+    float: right;
+    position: relative;
+    margin-top: -48px;
+}
+
+.object-tools li {
+    display: block;
+    float: left;
+    margin-left: 5px;
+    height: 16px;
+    list-style-type: square;
+    padding: 1px 0;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.object-tools a {
+    border-radius: 15px;
+}
+
+.object-tools a.addlink {
+    background-repeat: no-repeat;
+    background-position: right 7px center;
+    padding-right: 26px;
+    display: block;
+    float: left;
+    padding: 3px 12px;
+    background: #999;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.object-tools a:hover {
+    background-color: #90BEEC;
+}
+
+.changelist {
+    position: relative;
+    width: 100%;
+}
+
+.module {
+    border: none;
+    margin-bottom: 30px;
+    background: #fff;
+}
+
+.changelist-form .results {
+    overflow-x: auto;
+}
+
+.changelist table {
+    width: 100%;
+    border-collapse: collapse;
+    border-color: #ccc;
+}
+
+.changelist table thead th {
+    padding: 0;
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: normal;
+    text-transform: uppercase;
+    background: #f6f6f6;
+    color: #666;
+    font-size: 11px;
+    border: none;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    text-align: left;
+}
+
+table thead th .text span {
+    padding: 8px 10px;
+    display: block;
+}
+
+.changelist .paginator {
+    color: #666;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.paginator {
+    font-size: 13px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 22px;
+    margin: 0;
+    border-top: 1px solid #ddd;
+}

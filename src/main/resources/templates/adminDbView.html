@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site Administration | KCU site admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminPage.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="branding">
+            <h1 class="site-name-big">
+                <a href="/admin">KCU Administration</a>
+            </h1>
+        </div>
+
+        <div class="user-tools">
+            WELCOME, KCU ADMIN.
+            <a href="/">VIEW SITE</a>
+            /
+            <a href="/admin/logout">LOG OUT</a>
+        </div>
+    </div>
+    <!-- End Header -->
+    <div class="breadcrums">
+        <a href="/admin">Home</a>
+        ›
+        <a>KCU Database</a>
+        <span th:text="'› ' + ${tableName}"></span>
+    </div>
+    <!-- Content -->
+    <div class="content flex">
+        <h1>Select Name to Change</h1>
+        <div class="content-main">
+            <ul class="object-tools">
+                <li>
+                    <a class="addlink" th:href="@{/admin/{tableName}/add(tableName=${tableName.toLowerCase()})}" th:text="'Add ' + ${tableName}"></a>
+                </li>
+            </ul>
+
+            <div class="module changelist">
+                <form class="changelist-form" method="post" novalidate="">
+                    <div class="results">
+                        <table class="result-list">
+                            <thead>
+                                <tr>
+                                    <th class="column-__str__" scope="col">
+                                        <div class="text">
+                                            <span th:text="${tableName}"></span>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row1" th:each="item, iterStat : ${items}">
+                                    <th class="field-__str__">
+                                        <a th:href="@{/admin/{tableName}/{itemId}/change(tableName=${tableName.toLowerCase()}, itemId=${items[items.size() - 1 - iterStat.index].id})}"
+                                           th:text="${items[items.size() - 1 - iterStat.index].name}"></a>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="paginator" th:text="${items != null} ? (${items.size()} + ' ' + (${items.size()} > 1 ? 'Items' : 'Item')) : 'No items'"></p>
+                </form>
+            </div>
+        </div>
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+</div>
+</body>
+</html>

@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Repository
 public interface SemesterRepository extends JpaRepository<Semester, Long> {
-  Optional<Semester> findTopByOrderBySemesterNameDesc();
-  Optional<Semester> findBySemesterName(String semesterName);
+  Optional<Semester> findTopByOrderByNameDesc();
+  Optional<Semester> findByName(String semesterName);
 }

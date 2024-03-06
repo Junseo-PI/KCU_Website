@@ -27,7 +27,7 @@
                 <div class="select">
                     <select>
                         <div th:each="i : ${#numbers.sequence(semesters.size() - 1, 0, -1)}">
-                            <option th:value="${semesters[i].id}" th:text="${semesters[i].semesterName}"></option>
+                            <option th:value="${semesters[i].id}" th:text="${semesters[i].name}"></option>
                         </div>
                     </select>
                 </div>

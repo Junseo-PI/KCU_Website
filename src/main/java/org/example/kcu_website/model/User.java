@@ -11,23 +11,31 @@ public class User {
     private Long id;
 
     @Column(name = "user_id")
-    private String username;
+    private String name;
     @Column(name = "user_password")
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

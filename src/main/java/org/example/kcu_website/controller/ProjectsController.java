@@ -31,15 +31,15 @@ public class ProjectsController {
   // 최신 학기로 리다이렉트
   @GetMapping("/projects")
   public String redirectToLatestSemester() {
-    Optional<Semester> latestSemesterOpt = semesterRepository.findTopByOrderBySemesterNameDesc();
-    return latestSemesterOpt.map(semester -> "redirect:/projects/" + semester.getSemesterName())
+    Optional<Semester> latestSemesterOpt = semesterRepository.findTopByOrderByNameDesc();
+    return latestSemesterOpt.map(semester -> "redirect:/projects/" + semester.getName())
         .orElse("redirect:/errorPage");
   }
 
   // 특정 학기 프로젝트 전부 표시
   @GetMapping("/projects/{semesterName}")
   public String listProjectsBySemester(@PathVariable String semesterName, Model model) {
-    Optional<Semester> semesterOpt = semesterRepository.findBySemesterName(semesterName);
+    Optional<Semester> semesterOpt = semesterRepository.findByName(semesterName);
     List<Semester> semesters = semesterRepository.findAll();
 
     return semesterOpt.map(semester -> {
@@ -54,7 +54,7 @@ public class ProjectsController {
         dto.setLanguagesPlatforms(project.getLanguagesPlatforms());
         dto.setLongDescription(project.getLongDescription());
         dto.setShortDescription(project.getShortDescription());
-        dto.setSemesterName(semester.getSemesterName());
+        dto.setSemesterName(semester.getName());
         dto.setImages_link1(project.getImages_link1());
 
         List<Participant> participants = participantRepository.findByProjectId(project.getId());
@@ -67,7 +67,7 @@ public class ProjectsController {
       }).toList();
 
       model.addAttribute("projects", projects);
-      model.addAttribute("semesterName", semester.getSemesterName());
+      model.addAttribute("semesterName", semester.getName());
       model.addAttribute("semesterId", semesterName);
       model.addAttribute("projectDTOs", projectDTOs);
       model.addAttribute("semesters", semesters);
