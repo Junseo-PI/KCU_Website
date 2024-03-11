@@ -1,14 +1,13 @@
 package org.example.kcu_website.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Participants")
 public class Participant {
   @jakarta.persistence.Id
   @Column(name = "participant_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private Long projectId;
   private String name;

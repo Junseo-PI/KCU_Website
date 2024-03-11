@@ -416,3 +416,139 @@ table thead th .text span {
     margin: 0;
     border-top: 1px solid #ddd;
 }
+
+.form-row {
+    overflow: hidden;
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid #eee;
+}
+
+.aligned label {
+    display: block;
+    padding: 4px 10px 0 0;
+    float: left;
+    width: 160px;
+    word-wrap: break-word;
+    line-height: 1;
+}
+
+label.required {
+    font-weight: bold;
+    color: #333;
+}
+
+label {
+    font-weight: normal;
+    color: #666;
+    font-size: 13px;
+}
+
+.aligned label:not(.vCheckboxLabel)::after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 26px;
+}
+
+.aligned .form-row input {
+    margin-bottom: 0;
+}
+
+.form-row input {
+    vertical-align: middle;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="number"], input[type="tel"], textarea, select, .vTextField {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+    font-size: 13px;
+}
+
+.submit-row-addchange {
+    clear: both;
+    background: none;
+    padding: 12px 14px;
+    margin: 0 0 20px;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    text-align: right;
+    overflow: hidden;
+}
+
+.submit-row-addchange input {
+    background: #90BEEC;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    vertical-align: middle;
+    font-size: 13px;
+    margin: 0 0 0 8px;
+    text-transform: uppercase;
+    font-weight: 400;
+    height: 40px;
+}
+
+.submit-row-addchange input.default {
+    margin: 0 0 0 8px;
+    text-transform: uppercase;
+}
+
+input[type="submit"].default, .submit-row-addchange input.default {
+    float: right;
+    border: none;
+    font-weight: 400;
+    background: #90BEEC;
+}
+
+.submit-row-addchange p.deletelink-box {
+    float: left;
+    margin: 0;
+    line-height: 140%;
+    padding: 0;
+}
+
+.submit-row-addchange a.deletelink {
+    display: block;
+    background: #ba2121;
+    border-radius: 4px;
+    padding: 10px 20px;
+    height: 40px;
+    line-height: 20px;
+    color: #fff;
+    font-size: 14px;
+    text-align: right;
+}
+
+.imageupload input{
+    text-align: center;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 15px;
+    vertical-align: center;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+}
+
+.imageupload button{
+    margin-top: 2px;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 15px;
+    vertical-align: center;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    border-radius: 4px;
+}

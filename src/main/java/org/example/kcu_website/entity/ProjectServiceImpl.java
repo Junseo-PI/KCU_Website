@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -47,5 +48,41 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<Project> findProjectById(Long projectId) {
+        return projectRepository.findById(projectId);
+    }
+
+    @Override
+    public Optional<Participant> findParticipantById(Long participantId) {
+        return participantRepository.findById(participantId);
+    }
+
+    @Override
+    public Optional<Semester> findSemesterById(Long semesterId) {
+        return semesterRepository.findById(Long.valueOf(semesterId));
+    }
+
+    // saveOrUpdateParticipant 구현
+    @Override
+    public Participant saveOrUpdateParticipant(Participant participant) {
+        return participantRepository.save(participant);
+    }
+
+    @Override
+    public Project saveOrUpdateProject(Project project) {
+        return projectRepository.save(project);
+    }
+
+    @Override
+    public Semester saveOrUpdateSemester(Semester semester) {
+        return semesterRepository.save(semester);
+    }
+
+    @Override
+    public List<Project> getProjectsBySemesterId(Long semesterId) {
+        return projectRepository.findBySemesterId(semesterId);
     }
 }

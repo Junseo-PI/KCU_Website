@@ -36,14 +36,197 @@
         <a>KCU Database</a>
         ›
         <a th:href="@{/admin/{tableName}(tableName=${tableName})}" th:text="${#strings.capitalize(tableName)}"></a>
-        <span th:text="'› ' + ${name}"></span>
+        <span th:text="'› '"></span>
+        <span th:text="${entity.name}"></span>
     </div>
     <!-- Content -->
     <div class="content flex">
-        <h1>Select Name to Change</h1>
+        <h1 th:text="'Edit' + ${tableName}"></h1>
 
+        <!-- Participants Form -->
+        <div th:if="${tableName == 'Participants'}">
+            <form th:action="@{/admin/participants/{participantId}/change(participantId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned">
+
+                <div class="form-row field-id">
+                    <label class="required" for="participantId">
+                        Participant ID:
+                    </label>
+                    <input type="text" id="participantId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+                <div class="form-row field-name">
+                    <label for="name" class="required">Name:</label>
+                    <input type="text" id="name" th:field="*{name}" class="vTextField"/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="role" class="required">Role:</label>
+                    <input type="text" id="role" th:field="*{role}" class="vTextField"/>
+                </div>
+                <div class="form-row field-email">
+                    <label for="email" class="required">Email:</label>
+                    <input type="email" id="email" th:field="*{email}" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-semester">
+                    <label for="semester" class="required">Semester:</label>
+                    <select id="semester" name="semesterId">
+                        <option value="">Select Semester</option>
+                        <option th:each="semester : ${semesters}"
+                                th:value="${semester.id}"
+                                th:text="${semester.name}"
+                                th:selected="${selectedSemesterId == semester.id}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <div class="form-row field-project">
+                    <label for="project" class="required">Project:</label>
+                    <select id="project" name="projectId">
+                        <option th:each="project : ${projectsInSemester}"
+                                th:value="${project.id}"
+                                th:text="${project.name}"
+                                th:selected="${project.id == entity.projectId}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="id" name="id" th:value="${entity.id}"/>
+                    <p class="deletelink-box">
+                        <a class="deletelink" th:href="@{/admin/{tableName}/{participantId}/delete(tableName=${tableName}, participantId=${entity.id})}">Delete</a>
+                    </p>
+                </div>
+
+                <div>
+                </div>
+            </form>
+        </div>
+        <!-- END Participants Form -->
+
+        <!-- Projects Form -->
+        <div th:if="${tableName == 'Projects'}">
+            <form th:action="@{/admin/projects/{projectId}/change(projectId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned" enctype="multipart/form-data">
+
+                <div class="form-row field-id">
+                    <label class="required" for="projectId">
+                        Project ID:
+                    </label>
+                    <input type="text" id="projectId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+
+                <div class="form-row field-semester">
+                    <label for="projectSemester" class="required">Semester:</label>
+                    <select id="projectSemester" name="semesterId">
+                        <option value="">Select Semester</option>
+                        <option th:each="semester : ${semesters}"
+                                th:value="${semester.id}"
+                                th:text="${semester.name}"
+                                th:selected="${selectedSemesterId == semester.id}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-row field-name">
+                    <label for="projectName" class="required">Name:</label>
+                    <input type="text" id="projectName" th:field="*{name}" class="vTextField"/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="level" class="required">Level:</label>
+                    <select id="level" name="level" required th:field="*{level}">
+                        <option value="Advanced">Advanced</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Novice">Novice</option>
+                    </select>
+                </div>
+                <div class="form-row field-role">
+                    <label for="languagesPlatforms" class="required">Languages & Platforms:</label>
+                    <input type="text" id="languagesPlatforms" th:field="*{languagesPlatforms}" class="vTextField"/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="shortDescription" class="required">Short Description:</label>
+                    <textarea type="text" id="shortDescription" th:field="*{shortDescription}" rows="10" cols="50" class="vTextField" maxlength="200"></textarea>
+                </div>
+                <div class="form-row field-role">
+                    <label for="longDescription" class="required">Long Description:</label>
+                    <textarea type="text" id="longDescription" th:field="*{longDescription}" rows="10" cols="50" class="vTextField"></textarea>
+                </div>
+                <div class="form-row field-role">
+                    <label for="githubLink" class="required">GitHub Link:</label>
+                    <input type="url" id="githubLink" th:field="*{githubLink}" class="vTextField"/>
+                </div>
+
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink1" class="required">Image 1 Upload:</label>
+                    <div id="image1-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink1'); showUploadField('imageLink1', 'image1-status')">Delete</button>
+                        <button type="button" onclick="showUploadField('imageLink1', 'image1-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink1" style="display:none;" accept="image/png, image/jpeg" name="images_link1"/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink2">Image 2 Upload:</label>
+                    <div id="image2-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink2'); showUploadField('imageLink2', 'image2-status')">Delete</button>
+                        <button type="button" onclick="showUploadField('imageLink2', 'image2-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink2" style="display:none;" accept="image/png, image/jpeg" name="images_link2"/>
+                </div>
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink3">Image 3 Upload:</label>
+                    <div id="image3-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink3'); showUploadField('imageLink3', 'image3-status')">Delete</button>
+                        <button type="button" onclick="showUploadField('imageLink3', 'image3-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink3" style="display:none;" accept="image/png, image/jpeg" name="images_link3"/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="IdForVerification" name="id" th:value="${entity.id}"/>
+                    <p class="deletelink-box">
+                        <a class="deletelink" th:href="@{/admin/{tableName}/{projectId}/delete(tableName=${tableName}, projectId=${entity.id})}">Delete</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <!-- END Projects Form -->
     </div>
+
+
     <!-- END Content -->
 </div>
+
+<script>
+    function showUploadField(inputId, statusId) {
+        document.getElementById(inputId).style.display = 'block';
+        // 상태 메시지와 버튼을 숨깁니다.
+        document.getElementById(statusId).style.display = 'none';
+    }
+
+    function deleteImage(projectId, imageNumber) {
+        // AJAX 요청으로 서버에서 이미지 삭제 처리
+        $.ajax({
+            url: `/admin/projects/deleteImage/${projectId}/${imageNumber}`,
+            type: 'POST',
+            success: function(response) {
+                // 성공적으로 이미지 삭제 후 UI 업데이트
+                window.location.reload(); // 페이지를 새로고침하여 업데이트된 상태를 반영
+            },
+            error: function(error) {
+                console.log('Error deleting image:', error);
+            }
+        });
+    }
+</script>
+
+
 </body>
 </html>

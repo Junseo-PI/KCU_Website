@@ -20,6 +20,8 @@ public class ProjectDTO {
   private List<String> participantNames;
   private List<Participant> participants;
   private String images_link1;
+  private String images_link2;
+  private String images_link3;
   private ArrayList<String> imagesLink;
 
   public Long getId() {
@@ -124,5 +126,21 @@ public class ProjectDTO {
 
   public ArrayList<String> getImagesLink() {
     return imagesLink;
+  }
+
+  public void setImages_link2(String images_link2) {
+    this.images_link2 = images_link2;
+  }
+
+  public void setImages_link3(String images_link3) {
+    this.images_link3 = images_link3;
+  }
+
+  public String getImages_link2() {
+    return images_link2;
+  }
+
+  public String getImages_link3() {
+    return images_link3;
   }
 }
