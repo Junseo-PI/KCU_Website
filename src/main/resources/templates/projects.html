@@ -25,10 +25,8 @@
 
             <div class="selectbox-container">
                 <div class="select">
-                    <select>
-                        <div th:each="i : ${#numbers.sequence(semesters.size() - 1, 0, -1)}">
-                            <option th:value="${semesters[i].id}" th:text="${semesters[i].name}"></option>
-                        </div>
+                    <select onchange="redirectToProject(this.options[this.selectedIndex].text);">
+                        <option th:each="semester : ${semesters}" th:value="${semester.id}" th:text="${semester.name}"></option>
                     </select>
                 </div>
             </div>
@@ -62,6 +60,31 @@
         <!-- Footer -->
         <div th:insert="~{footer :: foot}"></div>
     </section>
+
+    <script>
+        function redirectToProject(semesterName) {
+            console.log(semesterName);
+            if(semesterName) {
+                window.location.href = '/projects/' + semesterName;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 현재 URL에서 학기 이름을 추출
+            const semesterName = window.location.pathname.split('/').pop();
+
+            // <select> 엘리먼트를 찾음
+            const selectElement = document.querySelector('select');
+
+            // <select>의 모든 <option>을 순회하며 현재 학기와 일치하는 옵션을 찾아 선택함
+            for (let option of selectElement.options) {
+                if (option.text === semesterName) {
+                    selectElement.value = option.value;
+                    break; // 일치하는 옵션을 찾았으므로 반복 중지
+                }
+            }
+        });
+    </script>
 </body>
 
 <script type="text/javascript" src="/script.js"></script>

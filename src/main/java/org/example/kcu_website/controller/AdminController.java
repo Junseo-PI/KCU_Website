@@ -219,12 +219,9 @@ public class AdminController {
             String storedFilePath = filePath + "/" + newFileName;
 
             filePath = new File(path + "/" + newFileName);
-            System.out.println(filePath);
             file.transferTo(filePath);
         }
 
-        // Return a relative path to be saved in the database
-        // Adjust the path according to how you access static resources
         return "/images/" + semesterName + "/" + newFileName;
     }
 
@@ -266,7 +263,6 @@ public class AdminController {
         if (imagesLink3 != null) project.setImages_link3(imagesLink3);
 
         String htmlReadyText = dto.getLongDescription().replace("\n", "<br>");
-
         project.setGithubLink(dto.getGithubLink());
         project.setLongDescription(htmlReadyText);
         project.setShortDescription(dto.getShortDescription());

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -65,6 +66,12 @@ public class ProjectsController {
         dto.setParticipantNames(participantNames);
         return dto;
       }).toList();
+
+      semesters.sort(Comparator.comparingInt(s -> {
+        int year = Integer.parseInt(s.getName().substring(2));
+        int term = s.getName().startsWith("SP") ? 0 : 1;
+        return year * 10 + term;
+      }));
 
       model.addAttribute("projects", projects);
       model.addAttribute("semesterName", semester.getName());
