@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebPageController {
 
-  @GetMapping("/")
-  public String index() {
-    return "index";
-  }
-
   @GetMapping("/aboutkcu")
   public String aboutkcu() {
     return "aboutKcu";

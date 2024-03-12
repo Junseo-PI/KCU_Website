@@ -39,7 +39,7 @@
         <section class="projects-overview-carousel">
             <div class="overview-header">
                 <div class="proj-overview-title">
-                    <h2 class="title">Projects Overview - SP24</h2>
+                    <h2 class="title">Projects Overview - <span th:text="${latestSemesterName}"></span></h2>
                 </div>
 
                 <div class="proj-overview-viewmore">
@@ -50,102 +50,17 @@
 
             <div class="swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="#">
-                            <img src="images/iPET.png">
+                    <div th:each="projectDTO : ${projectDTOs}" class="swiper-slide">
+                        <a th:href="@{/projects/{semesterName}/{projectId}(semesterName=${latestSemesterName}, projectId=${projectDTO.id})}">
+                            <img th:src="@{${projectDTO.images_link1}}" alt="Project Image">
                         </a>
                         <div class="textbox">
                             <div class="tags">
-                                <span style="color:#ea6262; border-color:#ea6262;">Advanced</span>
+                                <span th:class="${projectDTO.level == 'Advanced' ? 'advanced' : (projectDTO.level == 'Intermediate' ? 'intermediate' : 'novice')}" th:text="${projectDTO.level}"></span>
                             </div>
-                            <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
-                            <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET1</a>
+                            <a th:href="@{/projects/{semesterName}/{projectId}(semesterName=${latestSemesterName}, projectId=${projectDTO.id})}" th:text="${projectDTO.name}" class="title"></a>
                             <div class="team-members">
-                                <!-- DB에서 값 받게끔 수정: 이름 -->
-                                <span>Junseo Lee</span>
-                                <span>염경훈</span>
-                                <span>진시우</span>
-                                <span>박민우</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#">
-                            <img src="images/iPET.png">
-                        </a>
-                        <div class="textbox">
-                            <div class="tags">
-                                <span style="color:#fabd3b; border-color:#fabd3b;">Intermediate</span>
-                            </div>
-                            <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
-                            <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET2</a>
-                            <div class="team-members">
-                                <!-- DB에서 값 받게끔 수정: 이름 -->
-                                <span>Junseo Lee</span>
-                                <span>염경훈</span>
-                                <span>진시우</span>
-                                <span>박민우</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#">
-                            <img src="images/iPET.png">
-                        </a>
-                        <div class="textbox">
-                            <div class="tags">
-                                <span style="color:#9dda8d; border-color:#9dda8d;">Novice</span>
-                            </div>
-                            <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
-                            <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET3</a>
-                            <div class="team-members">
-                                <!-- DB에서 값 받게끔 수정: 이름 -->
-                                <span>Junseo Lee</span>
-                                <span>염경훈</span>
-                                <span>진시우</span>
-                                <span>박민우</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#">
-                            <img src="images/iPET.png">
-                        </a>
-                        <div class="textbox">
-                            <div class="tags">
-                                <span style="color:#EA6262; border-color:#EA6262;">Advanced</span>
-                            </div>
-                            <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
-                            <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET4</a>
-                            <div class="team-members">
-                                <!-- DB에서 값 받게끔 수정: 이름 -->
-                                <span>Junseo Lee</span>
-                                <span>염경훈</span>
-                                <span>진시우</span>
-                                <span>박민우</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#">
-                            <img src="images/iPET.png">
-                        </a>
-                        <div class="textbox">
-                            <div class="tags">
-                                <span style="color:#EA6262; border-color:#EA6262;">Advanced</span>
-                            </div>
-                            <!-- DB에서 값 받게끔 수정: 링크, 내용 -->
-                            <a href="https://www.wadiz.kr/web/campaign/detail/12256" target="_new" class="title">iPET5</a>
-                            <div class="team-members">
-                                <!-- DB에서 값 받게끔 수정: 이름 -->
-                                <span>Junseo Lee</span>
-                                <span>염경훈</span>
-                                <span>진시우</span>
-                                <span>박민우</span>
+                                <span th:each="name : ${projectDTO.participantNames}" th:text="${name}"></span>
                             </div>
                         </div>
                     </div>

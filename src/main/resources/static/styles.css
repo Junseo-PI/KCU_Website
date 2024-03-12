@@ -365,6 +365,10 @@ li {
     padding-right: 0.5rem;
 }
 
+.swiper-slide .textbox .team-members > span:not(:first-child) {
+    margin-left: 0.1rem;
+}
+
 .swiper-slide .textbox .team-members > span::after {
     position: absolute;
     top: 50%;
@@ -415,4 +419,19 @@ li {
 .swiper-button-next {
     background-image: url("images/arr-right-circle.png");
     background-color: transparent;
+}
+
+.advanced {
+    color: #EA6262;
+    border-color: #EA6262;
+}
+
+.intermediate {
+    color: #FADB3B;
+    border-color: #FADB3B;
+}
+
+.novice {
+    color: #9DDA8D;
+    border-color: #9DDA8D;
 }

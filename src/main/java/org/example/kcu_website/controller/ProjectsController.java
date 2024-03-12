@@ -13,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -80,6 +77,48 @@ public class ProjectsController {
       model.addAttribute("semesters", semesters);
       return "projects";
     }).orElse("redirect:/errorPage");
-
   }
+
+  @GetMapping("/")
+  public String index(Model model) {
+    // 가장 최신 학기 가져오기
+    Optional<Semester> latestSemesterOpt = semesterRepository.findTopByOrderByNameDesc();
+    if (!latestSemesterOpt.isPresent()) {
+      return "redirect:/errorPage"; // 오류 페이지로 리다이렉트
+    }
+    Semester latestSemester = latestSemesterOpt.get();
+
+    // 최신 학기의 프로젝트들 가져오기
+    List<Project> projects = projectRepository.findBySemesterId(latestSemester.getId());
+
+    // 성능 최적화를 위해 한 번의 조회로 모든 필요한 학기 정보를 가져옵니다.
+    Map<Long, String> semesterNameMap = new HashMap<>();
+    semesterRepository.findAll().forEach(s -> semesterNameMap.put(s.getId(), s.getName()));
+
+    List<ProjectDTO> projectDTOs = projects.stream().map(project -> {
+      ProjectDTO dto = new ProjectDTO();
+      dto.setId(project.getId());
+      dto.setName(project.getName());
+      dto.setImages_link1(project.getImages_link1());
+
+      List<Participant> participants = participantRepository.findByProjectId(project.getId());
+      List<String> participantNames = participants.stream()
+              .map(Participant::getName)
+              .collect(Collectors.toList());
+
+      dto.setParticipantNames(participantNames);
+      dto.setLevel(project.getLevel());
+      // 학기 ID를 사용하여 학기 이름을 설정
+      dto.setSemesterName(semesterNameMap.get(project.getSemesterId()));
+
+      return dto;
+    }).collect(Collectors.toList());
+
+    // 모델에 추가
+    model.addAttribute("latestSemesterName", latestSemester.getName());
+    model.addAttribute("projectDTOs", projectDTOs);
+
+    return "index"; // index.html로 리턴
+  }
+
 }
