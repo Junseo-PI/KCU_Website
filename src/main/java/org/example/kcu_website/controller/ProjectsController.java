@@ -91,7 +91,7 @@ public class ProjectsController {
     // 최신 학기의 프로젝트들 가져오기
     List<Project> projects = projectRepository.findBySemesterId(latestSemester.getId());
 
-    // 성능 최적화를 위해 한 번의 조회로 모든 필요한 학기 정보를 가져옵니다.
+    // 성능 최적화를 위해 한 번의 조회로 모든 필요한 학기 정보를 가져오기
     Map<Long, String> semesterNameMap = new HashMap<>();
     semesterRepository.findAll().forEach(s -> semesterNameMap.put(s.getId(), s.getName()));
 

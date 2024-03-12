@@ -41,7 +41,7 @@
     </div>
     <!-- Content -->
     <div class="content flex">
-        <h1 th:text="'Edit' + ${tableName}"></h1>
+        <h1 th:text="'Edit ' + ${tableName}"></h1>
 
         <!-- Participants Form -->
         <div th:if="${tableName == 'Participants'}">
@@ -198,6 +198,43 @@
             </form>
         </div>
         <!-- END Projects Form -->
+
+        <!-- Semesters Form -->
+        <div th:if="${tableName == 'Semesters'}">
+            <form th:action="@{/admin/semesters/{semesterId}/change(semesterId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned">
+
+                <div class="form-row field-id">
+                    <label class="required" for="participantId">
+                        Semester ID:
+                    </label>
+                    <input type="text" id="semesterId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+                <div class="form-row field-term">
+                    <label class="required" for="term">Term:</label>
+                    <select id="term" name="term">
+                        <option value="FA" th:selected="${term == 'FA'}">Fall (FA)</option>
+                        <option value="SP" th:selected="${term == 'SP'}">Spring (SP)</option>
+                    </select>
+                </div>
+                <div class="form-row field-year">
+                    <label for="year" class="required">Year:</label>
+                    <input type="text" id="year" name="year" th:value="${year}" pattern="\d{2}" title="Two digit year" maxlength="2" required/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="IdForVerifying" name="id" th:value="${entity.id}"/>
+                    <p class="deletelink-box">
+                        <a class="deletelink" th:href="@{/admin/{tableName}/{semesterId}/delete(tableName=${tableName}, semesterId=${entity.id})}">Delete</a>
+                    </p>
+                </div>
+
+                <div>
+                </div>
+            </form>
+        </div>
+        <!-- END Semesters Form -->
     </div>
 
 

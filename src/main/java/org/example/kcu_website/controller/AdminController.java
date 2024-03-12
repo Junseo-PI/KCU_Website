@@ -2,6 +2,8 @@ package org.example.kcu_website.controller;
 
 import org.example.kcu_website.entity.ProjectService;
 import org.example.kcu_website.model.*;
+import org.example.kcu_website.repository.SemesterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,15 +15,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class AdminController {
     private final ProjectService projectService;
 
-    public AdminController(ProjectService projectService) {
+    @Autowired
+    private SemesterRepository semesterRepository;
+
+    public AdminController(ProjectService projectService, SemesterRepository semesterRepository) {
         this.projectService = projectService;
+        this.semesterRepository = semesterRepository;
     }
 
     @RequestMapping("/admin/{tableName}")
@@ -38,6 +46,13 @@ public class AdminController {
 
             case "semesters":
                 items = projectService.getAllSemesters();
+                items = ((List<Semester>) items).stream()
+                        .sorted(Comparator.comparingInt(s -> {
+                            int year = Integer.parseInt(s.getName().substring(2));
+                            int term = s.getName().startsWith("SP") ? 0 : 1; // SP는 0, FA는 1로 처리하여 봄 학기가 가을 학기보다 먼저 오도록 함
+                            return (year * 10) + term; // 연도와 학기를 조합한 숫자를 기준으로 정렬
+                        }))
+                        .collect(Collectors.toList());
                 break;
 
             case "users":
@@ -149,20 +164,35 @@ public class AdminController {
 
     @GetMapping("/admin/semesters/{semesterId}/change")
     public String showSemesterEditForm(@PathVariable Long semesterId, Model model) {
-        Optional<Semester> semesterOpt = projectService.findSemesterById(semesterId);
-        if (!semesterOpt.isPresent()) {
-            return "redirect:/admin/semesters";
-        }
-        model.addAttribute("entity", semesterOpt.get());
+        Semester semester = semesterRepository.findById(semesterId)
+                .orElseThrow(() -> new IllegalStateException("Semester Not Found"));
+
+        String term = semester.getName().substring(0, 2);
+        String year = semester.getName().substring(2);
+
         model.addAttribute("tableName", "Semesters");
+        model.addAttribute("term", term);
+        model.addAttribute("year", year);
+        model.addAttribute("entity", semester);
+
         return "adminAddChange";
     }
 
     @PostMapping("/admin/semesters/{semesterId}/change")
-    public String updateSemester(@PathVariable Long semesterId,
-                                 @ModelAttribute Semester semester,
-                                 RedirectAttributes redirectAttributes) {
+    public String updateSemester(@PathVariable Long semesterId, @RequestParam("term") String term, @RequestParam("year") String year, RedirectAttributes redirectAttributes) {
+        String semesterName = term + year;
+
+        Semester semester = semesterRepository.findById(semesterId)
+                .orElseThrow(() -> new IllegalStateException("Semester Not Found"));
+
+        semester.setName(semesterName);
+
+        if(semester.getId() == null) {
+            semester.setId(semesterId);
+        }
+
         projectService.saveOrUpdateSemester(semester);
+
         redirectAttributes.addFlashAttribute("success", "Semester updated successfully!");
         return "redirect:/admin/semesters";
     }
