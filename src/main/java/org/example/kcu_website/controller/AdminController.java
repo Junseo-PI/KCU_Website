@@ -120,7 +120,7 @@ public class AdminController {
         model.addAttribute("tableName", "Projects");
         model.addAttribute("selectedSemesterId", projectOpt.get().getSemesterId());
 
-        return "adminChange";
+        return "adminProjectChange";
     }
 
     @PostMapping("/admin/projects/{projectId}/change")

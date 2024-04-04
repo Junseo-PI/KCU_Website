@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site Administration | KCU site admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminPage.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="branding">
+            <h1 class="site-name-big">
+                <a href="/admin">KCU Administration</a>
+            </h1>
+        </div>
+
+        <div class="user-tools">
+            WELCOME, KCU ADMIN.
+            <a href="/">VIEW SITE</a>
+            /
+            <a href="/admin/logout">LOG OUT</a>
+        </div>
+    </div>
+    <!-- End Header -->
+    <div class="breadcrums">
+        <a href="/admin">Home</a>
+        ›
+        <a>KCU Database</a>
+        ›
+        <a th:href="@{/admin/{tableName}(tableName=${tableName})}" th:text="${#strings.capitalize(tableName)}"></a>
+        <span th:text="'› '"></span>
+        <span th:text="${entity.name}"></span>
+    </div>
+    <!-- Content -->
+    <div class="content flex">
+        <h1 th:text="'Edit ' + ${tableName}"></h1>
+
+        <!-- Projects Form -->
+        <div th:if="${tableName == 'Projects'}">
+            <form th:action="@{/admin/projects/{projectId}/change(projectId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned" enctype="multipart/form-data">
+
+                <div class="form-row field-id">
+                    <label class="required" for="projectId">
+                        Project ID:
+                    </label>
+                    <input type="text" id="projectId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+
+                <div class="form-row field-semester">
+                    <label for="projectSemester" class="required">Semester:</label>
+                    <select id="projectSemester" name="semesterId">
+                        <option value="">Select Semester</option>
+                        <option th:each="semester : ${semesters}"
+                                th:value="${semester.id}"
+                                th:text="${semester.name}"
+                                th:selected="${selectedSemesterId == semester.id}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-row field-name">
+                    <label for="projectName" class="required">Name:</label>
+                    <input type="text" id="projectName" th:field="*{name}" class="vTextField"/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="level" class="required">Level:</label>
+                    <select id="level" name="level" required th:field="*{level}">
+                        <option value="Advanced">Advanced</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Novice">Novice</option>
+                    </select>
+                </div>
+                <div class="form-row field-role">
+                    <label for="languagesPlatforms" class="required">Languages & Platforms:</label>
+                    <input type="text" id="languagesPlatforms" th:field="*{languagesPlatforms}" class="vTextField"/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="shortDescription" class="required">Short Description:</label>
+                    <textarea type="text" id="shortDescription" th:field="*{shortDescription}" rows="10" cols="50" class="vTextField" maxlength="200"></textarea>
+                </div>
+                <div class="form-row field-role">
+                    <label for="longDescription" class="required">Long Description:</label>
+                    <textarea type="text" id="longDescription" th:field="*{longDescription}" rows="10" cols="50" class="vTextField"></textarea>
+                </div>
+                <div class="form-row field-role">
+                    <label for="githubLink" class="required">GitHub Link:</label>
+                    <input type="url" id="githubLink" th:field="*{githubLink}" class="vTextField"/>
+                </div>
+
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink1" class="required">Image 1 Upload:</label>
+                    <div id="image1-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" onclick="deleteImage(${entity.id}, '1')">Delete</button>
+                        <button type="button" onclick="showUploadField('imageLink1', 'image1-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink1" accept="image/png, image/jpeg" name="images_link1"/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink2">Image 2 Upload:</label>
+                    <div id="image2-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" onclick="deleteImage(${entity.id}, '2')">Delete</button>
+                        <button type="button" onclick="showUploadField('imageLink2', 'image2-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink2" accept="image/png, image/jpeg" name="images_link2"/>
+                </div>
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink3">Image 3 Upload:</label>
+                    <div id="image3-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" onclick="deleteImage(${entity.id}, '3')">Delete</button>
+                        <button type="button" onclick="showUploadField('imageLink3', 'image3-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink3" accept="image/png, image/jpeg" name="images_link3"/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="IdForVerification" name="id" th:value="${entity.id}"/>
+                    <p class="deletelink-box">
+                        <a class="deletelink" th:href="@{/admin/{tableName}/{projectId}/delete(tableName=${tableName}, projectId=${entity.id})}">Delete</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <!-- END Projects Form -->
+    </div>
+
+
+    <!-- END Content -->
+</div>
+
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var imagesLinkInfo = {
+            'imageLink1': [[${entity.images_link1}]],
+            'imageLink2': [[${entity.images_link2}]],
+            'imageLink3': [[${entity.images_link3}]]
+        };
+
+        // 페이지 로드 시 이미지 링크 상태에 따라 엘리먼트 표시를 조절합니다.
+        for (var key in imagesLinkInfo) {
+            if (imagesLinkInfo.hasOwnProperty(key)) {
+                var value = imagesLinkInfo[key];
+                var imageNumber = key.replace('imageLink', '');
+                var statusId = 'image' + imageNumber + '-status';
+                var inputId = 'imageLink' + imageNumber;
+
+                if (value === null) {
+                    document.getElementById(statusId).style.display = 'none';
+                    document.getElementById(inputId).style.display = 'block';
+                } else {
+                    document.getElementById(statusId).style.display = 'block';
+                    document.getElementById(inputId).style.display = 'none';
+                }
+            }
+        }
+    });
+
+    function showUploadField(inputId, statusId) {
+        document.getElementById(inputId).style.display = 'block';
+        document.getElementById(statusId).querySelector('p').style.display = 'none';
+        document.getElementById(statusId).querySelectorAll('button').forEach(button => button.style.display = 'none');
+    }
+
+    function deleteImage(projectId, imageNumber) {
+        // AJAX 요청으로 서버에서 이미지 삭제 처리
+        $.ajax({
+            url: `/admin/projects/deleteImage/${projectId}/${imageNumber}`,
+            type: 'POST',
+            success: function(response) {
+                const inputId = `imageLink${imageNumber}`;
+                const statusId = `image${imageNumber}-status`;
+                document.getElementById(inputId).style.display = 'block'; // 업로드 필드 표시
+                document.getElementById(statusId).style.display = 'none'; // 상태 메시지 숨김
+            },
+            error: function(error) {
+                console.log('Error deleting image:', error);
+            }
+        });
+    }
+</script>
+
+
+</body>
+</html>
