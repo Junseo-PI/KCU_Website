@@ -87,7 +87,7 @@ public class AdminController {
         }
         model.addAttribute("tableName", "Participants");
 
-        return "adminAddChange";
+        return "adminChange";
     }
 
     @PostMapping("/admin/participants/{participantId}/change")
@@ -120,7 +120,7 @@ public class AdminController {
         model.addAttribute("tableName", "Projects");
         model.addAttribute("selectedSemesterId", projectOpt.get().getSemesterId());
 
-        return "adminAddChange";
+        return "adminChange";
     }
 
     @PostMapping("/admin/projects/{projectId}/change")
@@ -175,7 +175,7 @@ public class AdminController {
         model.addAttribute("year", year);
         model.addAttribute("entity", semester);
 
-        return "adminAddChange";
+        return "adminChange";
     }
 
     @PostMapping("/admin/semesters/{semesterId}/change")
@@ -301,6 +301,23 @@ public class AdminController {
         project.setLanguagesPlatforms(dto.getLanguagesPlatforms());
         project.setSemesterId(dto.getSemesterId());
     }
+
+//    @GetMapping("/admin/participants/{participantId}/add")
+//    private String showParticipantAddForm(@PathVariable Long participantId,
+//                                  Model model) {
+//
+//
+//    }
+//
+//    @GetMapping("/admin/projects/{projectId}/add")
+//    private String AddProject() {
+//
+//    }
+//
+//    @GetMapping("/admin/semesters/{semesterId}/add")
+//    private String AddSemester() {
+//
+//    }
 
 }
 

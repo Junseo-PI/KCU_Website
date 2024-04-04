@@ -51,9 +51,12 @@
             <div class="swiper">
                 <div class="swiper-wrapper">
                     <div th:each="projectDTO : ${projectDTOs}" class="swiper-slide">
-                        <a th:href="@{/projects/{semesterName}/{projectId}(semesterName=${latestSemesterName}, projectId=${projectDTO.id})}">
-                            <img th:src="@{${projectDTO.images_link1}}" alt="Project Image">
-                        </a>
+                        <div class="aspect-ratio-box">
+                            <a th:href="@{/projects/{semesterName}/{projectId}(semesterName=${latestSemesterName}, projectId=${projectDTO.id})}">
+                                <img th:src="@{${projectDTO.images_link1}}" alt="Project Image">
+                            </a>
+                        </div>
+
                         <div class="textbox">
                             <div class="tags">
                                 <span th:class="${projectDTO.level == 'Advanced' ? 'advanced' : (projectDTO.level == 'Intermediate' ? 'intermediate' : 'novice')}" th:text="${projectDTO.level}"></span>

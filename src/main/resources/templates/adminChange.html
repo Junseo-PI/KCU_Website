@@ -163,29 +163,29 @@
                     <label for="imageLink1" class="required">Image 1 Upload:</label>
                     <div id="image1-status">
                         <p>File has already been uploaded.</p>
-                        <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink1'); showUploadField('imageLink1', 'image1-status')">Delete</button>
+                        <button type="button" onclick="deleteImage(${entity.id}, '1')">Delete</button>
                         <button type="button" onclick="showUploadField('imageLink1', 'image1-status')">Re-upload</button>
                     </div>
-                    <input type="file" id="imageLink1" style="display:none;" accept="image/png, image/jpeg" name="images_link1"/>
+                    <input type="file" id="imageLink1" style="display: none;" accept="image/png, image/jpeg" name="images_link1"/>
                 </div>
 
                 <div class="form-row field-role imageupload">
                     <label for="imageLink2">Image 2 Upload:</label>
-                    <div id="image2-status">
+                    <div id="image2-status" th:if="${entity.images_link2 != null}">
                         <p>File has already been uploaded.</p>
                         <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink2'); showUploadField('imageLink2', 'image2-status')">Delete</button>
                         <button type="button" onclick="showUploadField('imageLink2', 'image2-status')">Re-upload</button>
                     </div>
-                    <input type="file" id="imageLink2" style="display:none;" accept="image/png, image/jpeg" name="images_link2"/>
+                    <input type="file" id="imageLink2" accept="image/png, image/jpeg" name="images_link2" th:if="${entity.images_link2 == null}"/>
                 </div>
                 <div class="form-row field-role imageupload">
                     <label for="imageLink3">Image 3 Upload:</label>
-                    <div id="image3-status">
+                    <div id="image3-status" th:if="${entity.images_link3 != null}">
                         <p>File has already been uploaded.</p>
                         <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink3'); showUploadField('imageLink3', 'image3-status')">Delete</button>
                         <button type="button" onclick="showUploadField('imageLink3', 'image3-status')">Re-upload</button>
                     </div>
-                    <input type="file" id="imageLink3" style="display:none;" accept="image/png, image/jpeg" name="images_link3"/>
+                    <input type="file" id="imageLink3" accept="image/png, image/jpeg" name="images_link3" th:if="${entity.images_link3 == null}"/>
                 </div>
 
                 <div class="submit-row-addchange">
@@ -242,10 +242,18 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        initializeImageUploadFields();
+    });
+
+    function initializeImageUploadFields() {
+
+    }
+
     function showUploadField(inputId, statusId) {
         document.getElementById(inputId).style.display = 'block';
-        // 상태 메세지와 버튼 숨기기
-        document.getElementById(statusId).style.display = 'none';
+        document.getElementById(statusId).querySelector('p').style.display = 'none';
+        document.getElementById(statusId).querySelectorAll('button').forEach(button => button.style.display = 'none');
     }
 
     function deleteImage(projectId, imageNumber) {
@@ -254,8 +262,10 @@
             url: `/admin/projects/deleteImage/${projectId}/${imageNumber}`,
             type: 'POST',
             success: function(response) {
-                // 성공적으로 이미지 삭제 후 UI 업데이트
-                window.location.reload(); // 페이지를 새로고침하여 업데이트된 상태를 반영
+                const inputId = `imageLink${imageNumber}`;
+                const statusId = `image${imageNumber}-status`;
+                document.getElementById(inputId).style.display = 'block'; // 업로드 필드 표시
+                document.getElementById(statusId).style.display = 'none'; // 상태 메시지 숨김
             },
             error: function(error) {
                 console.log('Error deleting image:', error);
