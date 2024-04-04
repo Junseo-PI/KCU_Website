@@ -166,26 +166,26 @@
                         <button type="button" onclick="deleteImage(${entity.id}, '1')">Delete</button>
                         <button type="button" onclick="showUploadField('imageLink1', 'image1-status')">Re-upload</button>
                     </div>
-                    <input type="file" id="imageLink1" style="display: none;" accept="image/png, image/jpeg" name="images_link1"/>
+                    <input type="file" id="imageLink1" accept="image/png, image/jpeg" name="images_link1"/>
                 </div>
 
                 <div class="form-row field-role imageupload">
                     <label for="imageLink2">Image 2 Upload:</label>
-                    <div id="image2-status" th:if="${entity.images_link2 != null}">
+                    <div id="image2-status">
                         <p>File has already been uploaded.</p>
-                        <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink2'); showUploadField('imageLink2', 'image2-status')">Delete</button>
+                        <button type="button" onclick="deleteImage(${entity.id}, '2')">Delete</button>
                         <button type="button" onclick="showUploadField('imageLink2', 'image2-status')">Re-upload</button>
                     </div>
-                    <input type="file" id="imageLink2" accept="image/png, image/jpeg" name="images_link2" th:if="${entity.images_link2 == null}"/>
+                    <input type="file" id="imageLink2" accept="image/png, image/jpeg" name="images_link2"/>
                 </div>
                 <div class="form-row field-role imageupload">
                     <label for="imageLink3">Image 3 Upload:</label>
-                    <div id="image3-status" th:if="${entity.images_link3 != null}">
+                    <div id="image3-status">
                         <p>File has already been uploaded.</p>
-                        <button type="button" th:attr="data-projectid=${entity.id}" onclick="deleteImage(this.getAttribute('data-projectid'), 'imageLink3'); showUploadField('imageLink3', 'image3-status')">Delete</button>
+                        <button type="button" onclick="deleteImage(${entity.id}, '3')">Delete</button>
                         <button type="button" onclick="showUploadField('imageLink3', 'image3-status')">Re-upload</button>
                     </div>
-                    <input type="file" id="imageLink3" accept="image/png, image/jpeg" name="images_link3" th:if="${entity.images_link3 == null}"/>
+                    <input type="file" id="imageLink3" accept="image/png, image/jpeg" name="images_link3"/>
                 </div>
 
                 <div class="submit-row-addchange">
@@ -241,14 +241,32 @@
     <!-- END Content -->
 </div>
 
-<script>
-    $(document).ready(function () {
-        initializeImageUploadFields();
+<script th:inline="javascript">
+    var imagesLinkInfo = {
+        'imageLink1': [[${entity.images_link1}]],
+        'imageLink2': [[${entity.images_link2}]],
+        'imageLink3': [[${entity.images_link3}]]
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 페이지 로드 시 이미지 링크 상태에 따라 엘리먼트 표시를 조절합니다.
+        for (var key in imagesLinkInfo) {
+            if (imagesLinkInfo.hasOwnProperty(key)) {
+                var value = imagesLinkInfo[key];
+                var imageNumber = key.replace('imageLink', '');
+                var statusId = 'image' + imageNumber + '-status';
+                var inputId = 'imageLink' + imageNumber;
+
+                if (value === null) {
+                    document.getElementById(statusId).style.display = 'none';
+                    document.getElementById(inputId).style.display = 'block';
+                } else {
+                    document.getElementById(statusId).style.display = 'block';
+                    document.getElementById(inputId).style.display = 'none';
+                }
+            }
+        }
     });
-
-    function initializeImageUploadFields() {
-
-    }
 
     function showUploadField(inputId, statusId) {
         document.getElementById(inputId).style.display = 'block';
