@@ -3,7 +3,7 @@ package org.example.kcu_website.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Participants")
+@Table(name = "participants")
 public class Participant {
   @jakarta.persistence.Id
   @Column(name = "participant_id")

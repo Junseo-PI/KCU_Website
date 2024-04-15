@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Semesters")
+@Table(name = "semesters")
 public class Semester {
   @jakarta.persistence.Id
   @Column(name = "semester_id")
