@@ -369,4 +369,72 @@ public class AdminController {
         redirectAttributes.addFlashAttribute("success", "Participant updated successfully!");
         return "redirect:/admin/participants";
     }
+
+    @GetMapping("/admin/projects/add")
+    public String showProjectsAddForm(Model model) {
+        model.addAttribute("tableName", "Projects");
+
+        List<Semester> semesters = projectService.getAllSemesters();
+        model.addAttribute("semesters", semesters);
+
+        return "adminAddProjects";
+    }
+
+    @PostMapping("/admin/projects/add")
+    public String addProject(@RequestParam("semesterId") String semesterId,
+                             @RequestParam("projectName") String projectName,
+                             @RequestParam("level") String level,
+                             @RequestParam("languagesPlatforms") String languagesPlatforms,
+                             @RequestParam("shortDescription") String shortDescription,
+                             @RequestParam("longDescription") String longDescription,
+                             @RequestParam("githubLink") String githubLink,
+                             @ModelAttribute("projectImageDTO") ProjectImageDTO projectImageDTO,
+                                RedirectAttributes redirectAttributes) {
+
+        Project newProject = new Project();
+
+        newProject.setSemesterId(Long.valueOf(semesterId));
+        newProject.setName(projectName);
+        newProject.setLevel(level);
+        newProject.setLanguagesPlatforms(languagesPlatforms);
+        newProject.setShortDescription(shortDescription);
+        newProject.setLongDescription(longDescription);
+        newProject.setGithubLink(githubLink);
+
+        projectService.saveOrUpdateProject(newProject);
+
+        Long projectId = newProject.getId();
+
+        try {
+            projectImageDTO.setName(newProject.getName());
+            MultipartFile image1 = projectImageDTO.getImages_link1();
+            MultipartFile image2 = projectImageDTO.getImages_link2();
+            MultipartFile image3 = projectImageDTO.getImages_link3();
+
+            String imagesLink1 = null, imagesLink2 = null, imagesLink3 = null;
+
+            if (image1 != null && !image1.isEmpty()) {
+                imagesLink1 = saveImage(image1, projectId, "1");
+            }
+            if (image2 != null && !image2.isEmpty()) {
+                imagesLink2 = saveImage(image2, projectId, "2");
+            }
+            if (image3 != null && !image3.isEmpty()) {
+                imagesLink3 = saveImage(image3, projectId, "3");
+            }
+
+            // DTO를 이용하여 프로젝트 업데이트
+            updateProjectEntityFromDTO(newProject, projectImageDTO, imagesLink1, imagesLink2, imagesLink3);
+
+            projectService.saveOrUpdateProject(newProject);
+
+            redirectAttributes.addFlashAttribute("success", "Project updated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Error updating project: " + e.getMessage());
+        }
+
+        redirectAttributes.addFlashAttribute("success", "Project added successfully!");
+        return "redirect:/admin/projects";
+    }
 }

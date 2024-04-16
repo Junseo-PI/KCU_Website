@@ -14,6 +14,105 @@
 </head>
 
 <body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="branding">
+            <h1 class="site-name-big">
+                <a href="/admin">KCU Administration</a>
+            </h1>
+        </div>
+
+        <div class="user-tools">
+            WELCOME, KCU ADMIN.
+            <a href="/">VIEW SITE</a>
+            /
+            <a href="/admin/logout">LOG OUT</a>
+        </div>
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrums">
+        <a href="/admin">Home</a>
+        ›
+        <a>KCU Database</a>
+        ›
+        <a th:href="@{/admin/{tableName}(tableName=${tableName})}" th:text="${#strings.capitalize(tableName)}"></a>
+        <span th:text="'› '"></span>
+        <span th:text="Add"></span>
+    </div>
+
+    <!-- Content -->
+    <div class="content flex">
+        <h1 th:text="'Add ' + ${tableName}"></h1>
+
+        <!-- Projects Form -->
+        <div th:if="${tableName == 'Projects'}">
+            <form th:action="@{/admin/projects/add}" method="post" class="module aligned" enctype="multipart/form-data">
+
+                <div class="form-row field-semester">
+                    <label for="projectSemester" class="required">Semester:</label>
+                    <select id="projectSemester" name="semesterId">
+                        <option value="">Select Semester</option>
+                        <option th:each="semester : ${semesters}"
+                                th:value="${semester.id}"
+                                th:text="${semester.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-row field-name">
+                    <label for="projectName" class="required">Name:</label>
+                    <input type="text" id="projectName" name="projectName" class="vTextField" required/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="level" class="required">Level:</label>
+                    <select id="level" name="level" required>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Novice">Novice</option>
+                    </select>
+                </div>
+                <div class="form-row field-role">
+                    <label for="languagesPlatforms" class="required">Languages & Platforms:</label>
+                    <input type="text" id="languagesPlatforms" name="languagesPlatforms" class="vTextField" required/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="shortDescription" class="required">Short Description:</label>
+                    <textarea type="text" id="shortDescription" name="shortDescription" rows="10" cols="50" class="vTextField" maxlength="200" required></textarea>
+                </div>
+                <div class="form-row field-role">
+                    <label for="longDescription" class="required">Long Description:</label>
+                    <textarea type="text" id="longDescription" name="longDescription" rows="10" cols="50" class="vTextField" required></textarea>
+                </div>
+                <div class="form-row field-role">
+                    <label for="githubLink" class="required">GitHub Link:</label>
+                    <input type="url" id="githubLink" name="githubLink" class="vTextField" required/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink1" class="required">Image 1 Upload:</label>
+                    <input type="file" id="imageLink1" accept="image/png, image/jpeg" name="images_link1" required/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink2">Image 2 Upload:</label>
+                    <input type="file" id="imageLink2" accept="image/png, image/jpeg" name="images_link2"/>
+                </div>
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink3">Image 3 Upload:</label>
+                    <input type="file" id="imageLink3" accept="image/png, image/jpeg" name="images_link3"/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                </div>
+            </form>
+        </div>
+        <!-- END Projects Form -->
+    </div>
+    <!-- END Content -->
+</div>
 
 </body>
 </html>
