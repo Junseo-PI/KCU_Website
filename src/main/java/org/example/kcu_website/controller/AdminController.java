@@ -221,7 +221,7 @@ public class AdminController {
         String semesterName = semesterOpt.get().getName();
 
         String absolutePath = new File("").getAbsolutePath() + File.separator;
-        String path = absolutePath + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "images" + File.separator + semesterName;
+        String path = absolutePath + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "images" + File.separator + "projectImages";
 
         File filePath = new File(path);
 
@@ -252,7 +252,7 @@ public class AdminController {
             file.transferTo(filePath);
         }
 
-        return "/images/" + semesterName + "/" + newFileName;
+        return "/images/projectImages/" + newFileName;
     }
 
     @PostMapping("/admin/projects/deleteImage/{projectId}/{imageField}")
