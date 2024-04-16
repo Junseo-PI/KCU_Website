@@ -14,6 +14,132 @@
 </head>
 
 <body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="branding">
+            <h1 class="site-name-big">
+                <a href="/admin">KCU Administration</a>
+            </h1>
+        </div>
+
+        <div class="user-tools">
+            WELCOME, KCU ADMIN.
+            <a href="/">VIEW SITE</a>
+            /
+            <a href="/admin/logout">LOG OUT</a>
+        </div>
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrums">
+        <a href="/admin">Home</a>
+        ›
+        <a>KCU Database</a>
+        ›
+        <a th:href="@{/admin/{tableName}(tableName=${tableName})}" th:text="${#strings.capitalize(tableName)}"></a>
+        <span th:text="'› '"></span>
+        <span th:text="Add"></span>
+    </div>
+
+    <!-- Content -->
+    <div class="content flex">
+        <h1 th:text="'Add ' + ${tableName}"></h1>
+
+        <!-- Semesters Form-->
+        <div th:if="${tableName == 'Semesters'}">
+            <form th:action="@{/admin/semesters/add}" method="post" class="module aligned">
+
+                <div class="form-row field-term">
+                    <label class="required" for="term">Term:</label>
+                    <select id="term" name="term">
+                        <option value="FA" selected=>Fall (FA)</option>
+                        <option value="SP">Spring (SP)</option>
+                    </select>
+                </div>
+
+                <div class="form-row field-year">
+                    <label for="year" class="required">Year:</label>
+                    <input type="text" id="year" name="year" pattern="\d{2}" title="Two digit year" maxlength="2" required/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                </div>
+
+                <div>
+                </div>
+            </form>
+        </div>
+        <!-- END Semesters Form -->
+
+        <!-- Participants Form -->
+        <div th:if="${tableName == 'Participants'}">
+            <form th:action="@{/admin/participants/add}" method="post" class="module aligned">
+                <div class="form-row field-name">
+                    <label for="name" class="required">Name:</label>
+                    <input type="text" id="name" name="name" class="vTextField"/>
+                </div>
+                <div class="form-row field-role">
+                    <label for="role" class="required">Role:</label>
+                    <input type="text" id="role" name="role" class="vTextField"/>
+                </div>
+                <div class="form-row field-email">
+                    <label for="email" class="required">Email:</label>
+                    <input type="email" id="email" name="email" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-semester">
+                    <label for="semester" class="required">Semester:</label>
+                    <select id="semester" name="semesterId">
+                        <option value="">Select Semester</option>
+                        <option th:each="semester : ${semesters}"
+                                th:value="${semester.id}"
+                                th:text="${semester.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-row field-project">
+                    <label for="project" class="required">Project:</label>
+                    <select id="project" name="projectId">
+                        <option th:each="project : ${projectsInSemester}"
+                                th:value="${project.id}"
+                                th:text="${project.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                </div>
+
+                <div>
+                </div>
+            </form>
+        </div>
+        <!-- END Participants Form -->
+    </div>
+    <!-- END Content -->
+</div>
+
+<script>
+    document.getElementById('semester').addEventListener('change', function() {
+        var semesterId = this.value;
+        fetch(`/admin/projects/bySemester/${semesterId}`)
+            .then(response => response.json())
+            .then(data => {
+                var projectSelect = document.getElementById('project');
+                projectSelect.innerHTML = '';
+                data.forEach(project => {
+                    var option = new Option(project.name, project.id);
+                    projectSelect.add(option);
+                });
+            })
+            .catch(error => console.error('Error loading the projects:', error));
+    });
+</script>
 
 </body>
+
 </html>

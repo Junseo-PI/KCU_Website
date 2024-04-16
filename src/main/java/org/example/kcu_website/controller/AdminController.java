@@ -302,21 +302,71 @@ public class AdminController {
         project.setSemesterId(dto.getSemesterId());
     }
 
-//    @GetMapping("/admin/participants/{participantId}/add")
-//    private String showParticipantAddForm(@PathVariable Long participantId,
-//                                  Model model) {
-//
-//
-//    }
-//
-//    @GetMapping("/admin/projects/{projectId}/add")
-//    private String AddProject() {
-//
-//    }
-//
-//    @GetMapping("/admin/semesters/{semesterId}/add")
-//    private String AddSemester() {
-//
-//    }
+    @GetMapping("/admin/semesters/add")
+    public String showSemesterAddForm(Model model) {
+        model.addAttribute("tableName", "Semesters");
 
+        return "adminAdd";
+    }
+
+    @PostMapping("/admin/semesters/add")
+    public String addSemester(@RequestParam("term") String term,
+                                 @RequestParam("year") String year,
+                                 RedirectAttributes redirectAttributes) {
+
+        String semesterName = term + year;
+
+        Optional<Semester> existingSemester = semesterRepository.findByName(semesterName);
+
+        if (existingSemester.isPresent()) {
+            redirectAttributes.addFlashAttribute("error", "Semester with name " + semesterName + " already exists!");
+            return "redirect:/admin/semesters";
+        }
+
+        Semester newSemester = new Semester();
+
+        newSemester.setName(semesterName);
+
+        projectService.saveOrUpdateSemester(newSemester);
+
+        redirectAttributes.addFlashAttribute("success", "Semester added successfully!");
+        return "redirect:/admin/semesters";
+    }
+
+    @GetMapping("/admin/participants/add")
+    public String showParticipantsAddForm(Model model) {
+        List<Semester> semesters = projectService.getAllSemesters();
+        model.addAttribute("semesters", semesters);
+
+        model.addAttribute("tableName", "Participants");
+
+        return "adminAdd";
+    }
+
+    @GetMapping("/admin/projects/bySemester/{semesterId}")
+    @ResponseBody
+    public ResponseEntity<List<Project>> getProjectsBySemester(@PathVariable Long semesterId) {
+        List<Project> projects = projectService.getProjectsBySemesterId(semesterId);
+        return ResponseEntity.ok(projects);
+    }
+
+    @PostMapping("/admin/participants/add")
+    public String addParticipant( @RequestParam("name") String name,
+                                    @RequestParam("role") String role,
+                                    @RequestParam("email") String email,
+                                    @RequestParam("projectId") String projectId,
+                                    RedirectAttributes redirectAttributes) {
+
+        Participant newParticipant = new Participant();
+
+        newParticipant.setName(name);
+        newParticipant.setRole(role);
+        newParticipant.setEmail(email);
+        newParticipant.setProjectId(Long.valueOf(projectId));
+
+        projectService.saveOrUpdateParticipant(newParticipant);
+
+        redirectAttributes.addFlashAttribute("success", "Participant updated successfully!");
+        return "redirect:/admin/participants";
+    }
 }
