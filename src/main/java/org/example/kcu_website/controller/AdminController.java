@@ -1,11 +1,19 @@
 package org.example.kcu_website.controller;
 
+import java.security.Principal;
+import java.time.LocalDate;
+import java.util.Random;
+import javax.print.attribute.standard.PrinterName;
 import org.example.kcu_website.entity.ProjectService;
 import org.example.kcu_website.model.*;
 import org.example.kcu_website.repository.SemesterRepository;
+import org.example.kcu_website.repository.UserRepository;
+import org.example.kcu_website.s3.S3UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -27,13 +35,27 @@ public class AdminController {
     @Autowired
     private SemesterRepository semesterRepository;
 
-    public AdminController(ProjectService projectService, SemesterRepository semesterRepository) {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private S3UploadService s3UploadService;
+
+    public AdminController(ProjectService projectService, SemesterRepository semesterRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, S3UploadService s3UploadService) {
         this.projectService = projectService;
         this.semesterRepository = semesterRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.s3UploadService = s3UploadService;
     }
 
     @RequestMapping("/admin/{tableName}")
-    public String adminTable(Model model, @PathVariable("tableName") String tableName) {
+    public String adminTable(Model model, @PathVariable("tableName") String tableName, Principal principal) {
+        User user = userRepository.findByName(principal.getName());
+        String authority = user.getAuthority();
         List<?> items = null;
         switch (tableName.toLowerCase()) {
             case "projects":
@@ -56,6 +78,9 @@ public class AdminController {
                 break;
 
             case "users":
+                if (!authority.equals("ADMIN")) {
+                    return "redirect:/errorPage";
+                }
                 items = projectService.getAllUsers();
                 break;
         }
@@ -66,7 +91,13 @@ public class AdminController {
     }
 
     @GetMapping("/admin/participants/{participantId}/change")
-    public String showParticipantEditForm(@PathVariable Long participantId, Model model) {
+    public String showParticipantEditForm(@PathVariable Long participantId, Model model, Principal principal) {
+        User user = userRepository.findByName(principal.getName());
+        String authority = user.getAuthority();
+        if (!authority.equals("ADMIN")) {
+            return "redirect:/errorPage";
+        }
+
         Optional<Participant> participantOpt = projectService.findParticipantById(participantId);
         if (!participantOpt.isPresent()) {
             return "redirect:/admin/participants";
@@ -94,6 +125,7 @@ public class AdminController {
     public String updateParticipant(@PathVariable Long participantId,
                                     @ModelAttribute Participant participant,
                                     RedirectAttributes redirectAttributes) {
+
         if (participant.getId() == null) {
             participant.setId(participantId);
         }
@@ -104,7 +136,13 @@ public class AdminController {
     }
 
     @GetMapping("/admin/projects/{projectId}/change")
-    public String showProjectEditForm(@PathVariable Long projectId, Model model) {
+    public String showProjectEditForm(@PathVariable Long projectId, Model model, Principal principal) {
+        User user = userRepository.findByName(principal.getName());
+        String authority = user.getAuthority();
+        if (!authority.equals("ADMIN")) {
+            return "redirect:/errorPage";
+        }
+
         Optional<Project> projectOpt = projectService.findProjectById(projectId);
 
         if (!projectOpt.isPresent()) {
@@ -163,7 +201,14 @@ public class AdminController {
     }
 
     @GetMapping("/admin/semesters/{semesterId}/change")
-    public String showSemesterEditForm(@PathVariable Long semesterId, Model model) {
+    public String showSemesterEditForm(@PathVariable Long semesterId, Model model, Principal principal) {
+
+        User user = userRepository.findByName(principal.getName());
+        String authority = user.getAuthority();
+        if (!authority.equals("ADMIN")) {
+            return "redirect:/errorPage";
+        }
+
         Semester semester = semesterRepository.findById(semesterId)
                 .orElseThrow(() -> new IllegalStateException("Semester Not Found"));
 
@@ -198,11 +243,6 @@ public class AdminController {
     }
 
     private String saveImage(MultipartFile file, Long projectId, String imageNumber) throws IOException {
-        // TODO: 개발 환경에서는 /src/main/resources/ 아래에 파일을 프로그래매틱하게 저장하지만, 실제로 웹이 패키징되어 배포될 떄
-        // 이 경로를 읽기 전용이 되며, 파일을 쓸 수 없게 되므로 애플리케이션 외부의 경로나 데이터베이스, 클라우드 스토리지 같은 영구 저장소를 사용하도록
-        // 설정해야함.
-        // 현재는 개발단계기 때문에 정적 리소스에 저장함.
-
         if (file.isEmpty()) {
             throw new IOException("Failed to save empty file for project ID: " + projectId);
         }
@@ -220,16 +260,7 @@ public class AdminController {
 
         String semesterName = semesterOpt.get().getName();
 
-        String absolutePath = new File("").getAbsolutePath() + File.separator;
-        String path = absolutePath + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "images" + File.separator + "projectImages";
-
-        File filePath = new File(path);
-
         String newFileName = "";
-
-        if (!filePath.exists()) {
-            filePath.mkdirs();
-        }
 
         if (!file.isEmpty()) {
             String contentType = file.getContentType();
@@ -246,13 +277,9 @@ public class AdminController {
             }
 
             newFileName = projectId + "-" + imageNumber + originalFileExtension;
-            String storedFilePath = filePath + "/" + newFileName;
-
-            filePath = new File(path + "/" + newFileName);
-            file.transferTo(filePath);
         }
 
-        return "/images/projectImages/" + newFileName;
+        return s3UploadService.saveFile(file, newFileName);
     }
 
     @PostMapping("/admin/projects/deleteImage/{projectId}/{imageField}")
@@ -311,8 +338,8 @@ public class AdminController {
 
     @PostMapping("/admin/semesters/add")
     public String addSemester(@RequestParam("term") String term,
-                                 @RequestParam("year") String year,
-                                 RedirectAttributes redirectAttributes) {
+                              @RequestParam("year") String year,
+                              RedirectAttributes redirectAttributes) {
 
         String semesterName = term + year;
 
@@ -352,10 +379,10 @@ public class AdminController {
 
     @PostMapping("/admin/participants/add")
     public String addParticipant( @RequestParam("name") String name,
-                                    @RequestParam("role") String role,
-                                    @RequestParam("email") String email,
-                                    @RequestParam("projectId") String projectId,
-                                    RedirectAttributes redirectAttributes) {
+                                  @RequestParam("role") String role,
+                                  @RequestParam("email") String email,
+                                  @RequestParam("projectId") String projectId,
+                                  RedirectAttributes redirectAttributes) {
 
         Participant newParticipant = new Participant();
 
@@ -389,7 +416,7 @@ public class AdminController {
                              @RequestParam("longDescription") String longDescription,
                              @RequestParam("githubLink") String githubLink,
                              @ModelAttribute("projectImageDTO") ProjectImageDTO projectImageDTO,
-                                RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes) {
 
         Project newProject = new Project();
 
@@ -436,5 +463,50 @@ public class AdminController {
 
         redirectAttributes.addFlashAttribute("success", "Project added successfully!");
         return "redirect:/admin/projects";
+    }
+
+    @GetMapping("/admin/users/add")
+    public String showAdminAddUsersForm(Model model) {
+        // OTP ID 만들기
+        String semester;
+        String year;
+
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonthValue();
+
+        if (currentMonth >= 7 && currentMonth <= 11) {
+            semester = "fa"; // 가을 학기
+        } else {
+            semester = "sp"; // 봄 학기
+        }
+
+        int currentYear = currentDate.getYear() % 100; // 년도의 마지막 2자리만 사용
+        year = String.format("%02d", currentYear);
+
+        User latestUser = this.userRepository.findFirstByOrderByIdDesc();
+        String id = semester + year + String.format("%02d", latestUser.getId() + 1);
+
+
+
+        // OTP 비밀번호 만들기 (6글자 랜덤)
+        Random random = new Random();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < 6; i++) {
+            int digit = random.nextInt(10); // 0부터 9까지의 숫자 중 랜덤하게 선택
+            stringBuilder.append(digit);
+        }
+
+        String randomNumber = stringBuilder.toString();
+
+        User user = new User();
+        user.setName(id);
+        user.setPassword(passwordEncoder.encode(randomNumber));
+        user.setAuthority("USER");
+        userRepository.save(user);
+
+        model.addAttribute("id", id);
+        model.addAttribute("password", randomNumber);
+        return "adminAddUsers";
     }
 }

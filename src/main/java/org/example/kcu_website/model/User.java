@@ -15,6 +15,9 @@ public class User {
     @Column(name = "user_password")
     private String password;
 
+    @Column(name = "authority")
+    private String authority;
+
     public String getName() {
         return name;
     }
@@ -37,5 +40,13 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }
