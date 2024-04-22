@@ -327,3 +327,35 @@ html {
     color: #9DDA8D;
     border-color: #9DDA8D;
 }
+
+@media (max-width: 1319px) {
+    .project-detail-section {
+        padding: 0 1rem;
+    }
+
+    .content-left {
+        width: 100%;
+        padding: 0 0;
+    }
+
+    .content-right {
+        width: 100%
+    }
+
+    .swiper {
+        width: 100%;
+        height: auto;
+    }
+
+    .project-content-wrapper {
+        flex-direction: column;
+    }
+
+    .project-description {
+        margin-top: 2rem;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+    }
+}
