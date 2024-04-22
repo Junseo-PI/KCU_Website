@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +27,13 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/admin", true)
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout((logout) -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .deleteCookies("JSESSIONID")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .logoutSuccessUrl("/")
+                        .permitAll());
 
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
