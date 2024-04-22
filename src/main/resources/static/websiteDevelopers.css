@@ -226,3 +226,51 @@ html {
     text-overflow: ellipsis;
     margin-bottom: 0.1rem;
 }
+
+@media (max-width: 1319px) {
+    .developers-title h1{
+        font-size: 2rem;
+    }
+
+    .about-developers {
+        align-items: normal;
+        padding: 0 1rem;
+        flex-direction: column;
+    }
+
+    .developer-image {
+        flex: 0 0;
+        height: 250px;
+        width: 250px;
+        border-radius: 70%;
+        overflow: hidden;
+    }
+
+    .developer-image .profile {
+        height: 250px;
+    }
+
+    .developer-contents {
+        max-width: 100%;
+    }
+
+    .developer-contents .developer-name {
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+    }
+
+    .developer-contents .developer-role {
+        font-size: 1.2rem;
+    }
+
+    .developer-contents .developer-role > span::after {
+        height: 1.2rem;
+        margin-top: -0.3rem;
+    }
+
+    .developer-contents .developer-description {
+        word-wrap: break-word;
+        white-space: normal;
+        width: auto;
+    }
+}
