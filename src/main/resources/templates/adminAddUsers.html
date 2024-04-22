@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site Administration | KCU site admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminPage.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="branding">
+            <h1 class="site-name-big">
+                <a href="/admin">KCU Administration</a>
+            </h1>
+        </div>
+
+        <div class="user-tools">
+            WELCOME, <span th:text="${username}"></span>.
+            <a href="/">VIEW SITE</a>
+            /
+            <a href="/logout">LOG OUT</a>
+        </div>
+    </div>
+    <!-- END Header -->
+
+    <div class="breadcrums">
+        <a href="/admin">Home</a>
+        ›
+        <a>KCU Database</a>
+        ›
+        <a th:href="@{/admin/{tableName}(tableName=${tableName})}" th:text="${#strings.capitalize(tableName)}"></a>
+        <span th:text="'› '"></span>
+        <span th:text="Add"></span>
+    </div>
+
+    <!-- Content -->
+    <div class="content flex">
+        <h1 th:text="'Add ' + ${tableName}"></h1>
+
+        <!-- Users Form-->
+        <div th:if="${tableName == 'Users'}">
+            <form th:action="@{/admin/users/add}" method="post" class="module aligned">
+                <div class="form-row field-id">
+                    <label class="required" for="userId">
+                        User ID:
+                    </label>
+                    <input type="text" id="userId" th:value="${id}" readonly class="vTextField" name="userId"/>
+                </div>
+                <div class="form-row field-pw">
+                    <label class="required" for="userPw">
+                        Password
+                    </label>
+                    <input type="text" id="userPw" th:value="${password}" readonly class="vTextField" name="userPw"/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                </div>
+
+                <div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END Content -->
+</div>
+</body>
+</html>

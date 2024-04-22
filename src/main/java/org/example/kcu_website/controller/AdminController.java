@@ -51,6 +51,9 @@ public class AdminController {
 
     @RequestMapping("/admin/{tableName}")
     public String adminTable(Model model, @PathVariable("tableName") String tableName, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         User user = userRepository.findByName(principal.getName());
         String authority = user.getAuthority();
         List<?> items = null;
@@ -89,6 +92,9 @@ public class AdminController {
 
     @GetMapping("/admin/participants/{participantId}/change")
     public String showParticipantEditForm(@PathVariable Long participantId, Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         User user = userRepository.findByName(principal.getName());
         String authority = user.getAuthority();
         if (!authority.equals("ADMIN")) {
@@ -122,7 +128,6 @@ public class AdminController {
     public String updateParticipant(@PathVariable Long participantId,
                                     @ModelAttribute Participant participant,
                                     RedirectAttributes redirectAttributes) {
-
         if (participant.getId() == null) {
             participant.setId(participantId);
         }
@@ -134,6 +139,9 @@ public class AdminController {
 
     @GetMapping("/admin/projects/{projectId}/change")
     public String showProjectEditForm(@PathVariable Long projectId, Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         User user = userRepository.findByName(principal.getName());
         String authority = user.getAuthority();
         if (!authority.equals("ADMIN")) {
@@ -199,6 +207,8 @@ public class AdminController {
 
     @GetMapping("/admin/semesters/{semesterId}/change")
     public String showSemesterEditForm(@PathVariable Long semesterId, Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
 
         User user = userRepository.findByName(principal.getName());
         String authority = user.getAuthority();
@@ -327,7 +337,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/semesters/add")
-    public String showSemesterAddForm(Model model) {
+    public String showSemesterAddForm(Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         model.addAttribute("tableName", "Semesters");
 
         return "adminAdd";
@@ -358,7 +371,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/participants/add")
-    public String showParticipantsAddForm(Model model) {
+    public String showParticipantsAddForm(Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         List<Semester> semesters = projectService.getAllSemesters();
         model.addAttribute("semesters", semesters);
 
@@ -395,7 +411,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/projects/add")
-    public String showProjectsAddForm(Model model) {
+    public String showProjectsAddForm(Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         model.addAttribute("tableName", "Projects");
 
         List<Semester> semesters = projectService.getAllSemesters();
@@ -463,7 +482,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/users/add")
-    public String showAdminAddUsersForm(Model model) {
+    public String showAdminAddUsersForm(Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
         // OTP ID 만들기
         String semester;
         String year;
@@ -483,8 +505,6 @@ public class AdminController {
         User latestUser = this.userRepository.findFirstByOrderByIdDesc();
         String id = semester + year + String.format("%02d", latestUser.getId() + 1);
 
-
-
         // OTP 비밀번호 만들기 (6글자 랜덤)
         Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder();
@@ -496,14 +516,32 @@ public class AdminController {
 
         String randomNumber = stringBuilder.toString();
 
+        model.addAttribute("id", id);
+        model.addAttribute("password", randomNumber);
+        model.addAttribute("tableName", "Users");
+        return "adminAddUsers";
+    }
+
+    @PostMapping("/admin/users/add")
+    public String addUser(@RequestParam("userId") String userId,
+                             @RequestParam("userPw") String userPw,
+                             RedirectAttributes redirectAttributes) {
+
         User user = new User();
-        user.setName(id);
-        user.setPassword(passwordEncoder.encode(randomNumber));
+        user.setName(userId);
+        user.setPassword(passwordEncoder.encode(userPw));
         user.setAuthority("USER");
         userRepository.save(user);
 
-        model.addAttribute("id", id);
-        model.addAttribute("password", randomNumber);
-        return "adminAddUsers";
+        redirectAttributes.addFlashAttribute("success", "User added successfully!");
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/admin")
+    public String adminView(Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
+        return "/admin";
     }
 }
