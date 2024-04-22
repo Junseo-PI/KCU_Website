@@ -132,7 +132,7 @@ html {
 
 .slide-main {
     position: relative;
-    z-index: 1; /* Optional, ensures .slide-main has a lower stacking context than .sub-wrap */
+    z-index: 1;
 }
 
 /* Slider for Banner */
@@ -148,7 +148,7 @@ html {
     position: relative;
 
     /* size */
-    width: 100%;
+    width: 1305px;
 
     /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
     user-select: none;
@@ -164,7 +164,7 @@ html {
     left: 0px;
 
     /* size */
-    width: 100%;
+    width: 1305px;
     height: 450px;
     /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
     flex-shrink: 0;
@@ -205,12 +205,6 @@ html {
 }
 
 /* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
-.slide_item.item1 {
-    background:url("images/mokup3.png")
-}
-.slide_item.item2 {
-    background:url("images/mokup4.png")
-}
 .slide_item.item3 {
     background-color: blueviolet;
 }
@@ -452,4 +446,62 @@ li {
 .novice {
     color: #9DDA8D;
     border-color: #9DDA8D;
+}
+
+/*
+ * RWD
+ * 1320px < 는 일반적인 데스크탑 view
+ * 1320 > 는 모바일 / 태블릿 view
+ */
+@media (max-width: 1319px) {
+    .slide {
+        width: 100%;
+    }
+
+    .slide_item {
+        width: 100%;
+        height: calc(100vw * (450 / 1305));
+    }
+
+    .slide_item img {
+        width: 100%;
+    }
+
+    .tags {
+        line-height: 1rem;
+    }
+
+    .tags > span {
+        font-size: 0.8rem;
+    }
+
+    .swiper-slide .textbox .title {
+        font-size: 1.1rem;
+        line-height: 2rem;
+    }
+
+    .swiper-slide .textbox .team-members {
+        font-size: 0.8rem;
+    }
+
+    .swiper-slide .textbox .team-members > span::after {
+        height: 0.8rem;
+        margin-top: -0.3rem;
+    }
+
+    .proj-overview-title .title {
+        font-size: 1.5rem;
+        line-height: 4rem;
+        font-weight: 500;
+    }
+
+    .proj-overview-viewmore {
+        display: none;
+    }
+
+    .projects-overview-carousel {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-top: 2rem;
+    }
 }

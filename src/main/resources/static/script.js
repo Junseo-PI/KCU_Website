@@ -243,8 +243,8 @@ slide.addEventListener("mouseout", () => {
 
 // Projects Overview Slider 구현
 const swiper = new Swiper('.swiper', {
-    slidesPerView: 3,
-    spaceBetween: 30,
+    slidesPerView: 1,
+    spaceBetween: 10,
 
     direction: 'horizontal',
     loop: true,
@@ -252,5 +252,12 @@ const swiper = new Swiper('.swiper', {
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
+    },
+
+    breakpoints: {
+        1319: {
+            slidesPerView: 3,
+            spaceBetween: 30
+        }
     }
 })

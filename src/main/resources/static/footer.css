@@ -62,3 +62,23 @@ footer{
     text-transform: capitalize;
     color: #777777;
 }
+
+@media (max-width: 1319px) {
+    .footer-container {
+        flex-direction: column;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .footer-content {
+        max-width: 100%;
+        flex: 1;
+    }
+
+    .footer-content h4{
+        font-size: 1rem;
+        line-height: 1.8rem;
+        width: 100%;
+        word-wrap: normal;
+    }
+}
