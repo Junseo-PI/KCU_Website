@@ -542,6 +542,6 @@ public class AdminController {
         String username = principal != null ? principal.getName() : "Anonymous";
         model.addAttribute("username", username);
 
-        return "/admin";
+        return "admin";
     }
 }

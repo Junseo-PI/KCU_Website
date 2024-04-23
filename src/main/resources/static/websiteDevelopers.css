@@ -130,12 +130,12 @@ html {
     overflow-y: scroll;
 }
 
-.developers-section {
+.developers-section, .leaders-section {
     padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
     padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
 }
 
-.developers-title {
+.developers-title, .leaders-title {
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -143,13 +143,13 @@ html {
     margin-bottom: 2rem;
 }
 
-.developers-title h1{
+.developers-title h1, .leaders-title h1{
     font-size: 3rem;
     font-weight: 700;
     line-height: 2rem;
 }
 
-.about-developers {
+.about-developers, .about-leaders {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -158,7 +158,7 @@ html {
     margin-bottom: 2rem;
 }
 
-.developer-image {
+.developer-image, .leader-image {
     display: flex;
     flex: 0 0 250px;
     height: 250px;
@@ -167,16 +167,16 @@ html {
     margin-right: 20px;
 }
 
-.developer-image .profile {
+.developer-image .profile, .leader-image .profile{
     object-fit: cover;
 }
 
-.developer-contents {
+.developer-contents, .leader-contents {
     flex-grow: 1;
     max-width: calc(100% - 270px);
 }
 
-.developer-contents .developer-name {
+.developer-contents .developer-name, .leader-contents .leader-name {
     display: block;
     font-size: 2rem;
     font-weight: 700;
@@ -186,7 +186,7 @@ html {
     margin-bottom: 1rem;
 }
 
-.developer-contents .developer-role {
+.developer-contents .developer-role, .leader-contents .leader-semesters {
     display: block;
     font-size: 1.3rem;
     font-weight: 500;
@@ -195,14 +195,14 @@ html {
     margin-bottom: 0.5rem;
 }
 
-.developer-contents .developer-role > span {
+.developer-contents .developer-role > span, .leader-contents .leader-semesters > span {
     position: relative;
     display: inline-block;
     margin-right: 0.1rem;
     padding-right: 0.5rem;
 }
 
-.developer-contents .developer-role > span::after {
+.developer-contents .developer-role > span::after, .leader-contents .leader-semesters > span::after {
     position: absolute;
     top: 50%;
     right: 0px;
@@ -214,11 +214,11 @@ html {
     content: "";
 }
 
-.developer-contents .developer-role > span:last-child::after {
+.developer-contents .developer-role > span:last-child::after, .leader-contents .leader-semesters > span:last-child::after {
     display: none;
 }
 
-.developer-contents .developer-description {
+.developer-contents .developer-description, .leader-contents .leader-description {
     display: block;
     font-size: 1rem;
     font-weight: 400;
@@ -228,17 +228,17 @@ html {
 }
 
 @media (max-width: 1319px) {
-    .developers-title h1{
+    .developers-title h1, .leaders-title h1{
         font-size: 2rem;
     }
 
-    .about-developers {
+    .about-developers, .about-leaders {
         align-items: normal;
         padding: 0 1rem;
         flex-direction: column;
     }
 
-    .developer-image {
+    .developer-image, .leader-image {
         flex: 0 0;
         height: 250px;
         width: 250px;
@@ -246,29 +246,29 @@ html {
         overflow: hidden;
     }
 
-    .developer-image .profile {
+    .developer-image .profile, .leader-image .profile {
         height: 250px;
     }
 
-    .developer-contents {
+    .developer-contents, .leader-contents {
         max-width: 100%;
     }
 
-    .developer-contents .developer-name {
+    .developer-contents .developer-name, .leader-contents .leader-name {
         font-size: 1.5rem;
         line-height: 1.5rem;
     }
 
-    .developer-contents .developer-role {
+    .developer-contents .developer-role, .leader-contents .leader-semesters {
         font-size: 1.2rem;
     }
 
-    .developer-contents .developer-role > span::after {
+    .developer-contents .developer-role > span::after, .leader-contents .leader-semesters > span::after {
         height: 1.2rem;
         margin-top: -0.3rem;
     }
 
-    .developer-contents .developer-description {
+    .developer-contents .developer-description, .leader-contents .leader-description {
         word-wrap: break-word;
         white-space: normal;
         width: auto;

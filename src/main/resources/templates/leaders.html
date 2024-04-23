@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to KCU!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="websiteDevelopers.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
 
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+<section id="container" class="page-index">
+    <!-- Header -->
+    <div th:insert="~{header :: head}"></div>
+
+    <section class="leaders-section">
+        <div class="leaders-title">
+            <h1>Leaders</h1>
+        </div>
+
+        <div class="about-leaders">
+            <div class="leader-image">
+                <img src="images/dummy_profile.jpg" class="profile">
+            </div>
+            <div class="leader-contents">
+                <div class="leader-name">
+                    Hyeonmin Yang
+                </div>
+                <div class="leader-semesters">
+                    <span>
+                        SP24 - PRESENT
+                    </span>
+                    <span>
+                        <a href="mailto:dkim762@wisc.edu">dkim762@wisc.edu</a>
+                    </span>
+                </div>
+                <div class="leader-description">
+                    <a>
+                        Introduce yourself (Max 500 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi. Fusce vehicula quam metus, ac sagittis risus dictum non. Fusce id accumsan sem, eu sodales ipsum. Suspendisse porttitor nibh sed gravida eleifend. Etiam suscipit vel urna ac porttitor. Etiam metus sapien, ullamcorper vitae facilisis eu, faucibus ac ante. Pellentesque eu euismod nisi. Aliquam interdum mauris a efficitur volutpat. Vivamus interdum arcu dui eu.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div th:insert="~{footer :: foot}"></div>
+</section>
 </body>
+
+<script type="text/javascript" src="/script.js"></script>
 </html>
