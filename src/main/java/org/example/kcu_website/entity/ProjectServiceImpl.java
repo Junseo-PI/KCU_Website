@@ -1,13 +1,7 @@
 package org.example.kcu_website.entity;
 
-import org.example.kcu_website.model.Participant;
-import org.example.kcu_website.model.Project;
-import org.example.kcu_website.model.Semester;
-import org.example.kcu_website.model.User;
-import org.example.kcu_website.repository.ParticipantRepository;
-import org.example.kcu_website.repository.ProjectRepository;
-import org.example.kcu_website.repository.SemesterRepository;
-import org.example.kcu_website.repository.UserRepository;
+import org.example.kcu_website.model.*;
+import org.example.kcu_website.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +14,17 @@ public class ProjectServiceImpl implements ProjectService {
     private final ParticipantRepository participantRepository;
     private final SemesterRepository semesterRepository;
     private final UserRepository userRepository;
+    private final BannerRepository bannerRepository;
 
     @Autowired
     public ProjectServiceImpl(ProjectRepository projectRepository, ParticipantRepository participantRepository,
-                              SemesterRepository semesterRepository, UserRepository userRepository) {
+                              SemesterRepository semesterRepository, UserRepository userRepository,
+                              BannerRepository bannerRepository) {
         this.projectRepository = projectRepository;
         this.participantRepository = participantRepository;
         this.semesterRepository = semesterRepository;
         this.userRepository = userRepository;
+        this.bannerRepository = bannerRepository;
     }
 
     @Override
@@ -51,6 +48,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Banner> getAllBanners() {
+        return bannerRepository.findAll();
+    }
+
+    @Override
     public Optional<Project> findProjectById(Long projectId) {
         return projectRepository.findById(projectId);
     }
@@ -65,6 +67,11 @@ public class ProjectServiceImpl implements ProjectService {
         return semesterRepository.findById(Long.valueOf(semesterId));
     }
 
+    @Override
+    public Optional<Banner> findBannerById(Long bannerId) {
+        return bannerRepository.findById(bannerId);
+    }
+
     // saveOrUpdateParticipant 구현
     @Override
     public Participant saveOrUpdateParticipant(Participant participant) {
@@ -74,6 +81,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project saveOrUpdateProject(Project project) {
         return projectRepository.save(project);
+    }
+
+    @Override
+    public Banner saveOrUpdateBanner(Banner banner) {
+        return bannerRepository.save(banner);
     }
 
     @Override

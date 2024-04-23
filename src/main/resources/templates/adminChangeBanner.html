@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site Administration | KCU site admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/adminPage.css">
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="branding">
+            <h1 class="site-name-big">
+                <a href="/admin">KCU Administration</a>
+            </h1>
+        </div>
+
+        <div class="user-tools">
+            WELCOME, <span th:text="${username}"></span>.
+            <a href="/">VIEW SITE</a>
+            /
+            <a href="/logout">LOG OUT</a>
+        </div>
+    </div>
+    <!-- End Header -->
+    <div class="breadcrums">
+        <a href="/admin">Home</a>
+        ›
+        <a>KCU Database</a>
+        ›
+        <a th:href="@{/admin/{tableName}(tableName=${tableName})}" th:text="${#strings.capitalize(tableName)}"></a>
+        <span th:text="'› '"></span>
+        <span th:text="${entity.name}"></span>
+    </div>
+    <!-- Content -->
+    <div class="content flex">
+        <h1 th:text="'Edit ' + ${tableName}"></h1>
+
+        <!-- Banners Form -->
+        <div th:if="${tableName == 'Banners'}">
+            <form th:action="@{/admin/banners/{bannerId}/change(bannerId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned" enctype="multipart/form-data">
+
+                <div class="form-row field-id">
+                    <label class="required" for="bannerId">
+                        Banner ID:
+                    </label>
+                    <input type="text" id="bannerId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+
+                <div class="form-row field-name">
+                    <label for="bannerName" class="required">Name:</label>
+                    <input type="text" id="bannerName" th:field="*{name}" readonly class="vTextField"/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink" class="required">Banner Image Upload:</label>
+                    <div id="image-status">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" onclick="showUploadField('imageLink', 'image-status')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink" accept="image/png, image/jpeg" name="image_link"/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="IdForVerification" name="id" th:value="${entity.id}"/>
+                </div>
+            </form>
+        </div>
+        <!-- END Banners Form -->
+    </div>
+
+
+    <!-- END Content -->
+</div>
+
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var imagesLinkInfo = {
+            'imageLink': [[${entity.imageLink}]],
+        };
+
+        // 페이지 로드 시 이미지 링크 상태에 따라 엘리먼트 표시를 조절합니다.
+        for (var key in imagesLinkInfo) {
+            if (imagesLinkInfo.hasOwnProperty(key)) {
+                var value = imagesLinkInfo[key];
+                var statusId = 'image' + '-status';
+                var inputId = 'imageLink';
+
+                if (value === null) {
+                    document.getElementById(statusId).style.display = 'none';
+                    document.getElementById(inputId).style.display = 'block';
+                } else {
+                    document.getElementById(statusId).style.display = 'block';
+                    document.getElementById(inputId).style.display = 'none';
+                }
+            }
+        }
+    });
+
+    function showUploadField(inputId, statusId) {
+        document.getElementById(inputId).style.display = 'block';
+        document.getElementById(statusId).querySelector('p').style.display = 'none';
+        document.getElementById(statusId).querySelectorAll('button').forEach(button => button.style.display = 'none');
+    }
+</script>
+
+
+</body>
+</html>

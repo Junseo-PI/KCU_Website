@@ -11,6 +11,7 @@ import org.example.kcu_website.s3.S3UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +84,12 @@ public class AdminController {
                 }
                 items = projectService.getAllUsers();
                 break;
+
+            case "banners":
+                if (!authority.equals("ADMIN")) {
+                    return "redirect:/errorPage";
+                }
+                items = projectService.getAllBanners();
         }
 
         model.addAttribute("tableName", tableName.substring(0, 1).toUpperCase() + tableName.substring(1));
@@ -284,6 +291,39 @@ public class AdminController {
             }
 
             newFileName = projectId + "-" + imageNumber + originalFileExtension;
+        }
+
+        return s3UploadService.saveFile(file, newFileName);
+    }
+
+    private String saveImage(MultipartFile file, String banner, Long bannerId) throws IOException {
+        String newFileName = "";
+        if (banner.equals("Banner")) {
+            if (file.isEmpty()) {
+                throw new IOException("Failed to save empty file for banner ID: " + bannerId);
+            }
+
+            Optional<Banner> bannerOpt = projectService.findBannerById(bannerId);
+            if (!bannerOpt.isPresent()) {
+                throw new IllegalStateException("Banner Not Found");
+            }
+
+            if (!file.isEmpty()) {
+                String contentType = file.getContentType();
+                String originalFileExtension = "";
+
+                if (!ObjectUtils.isEmpty(contentType)) {
+                    if (contentType.contains("image/jpeg")) {
+                        originalFileExtension = ".jpg";
+                    } else if (contentType.contains("image/png")) {
+                        originalFileExtension = ".png";
+                    } else {
+                        throw new IOException("Only jpeg and png are allowed.");
+                    }
+                }
+
+                newFileName = "banner-" + bannerId + originalFileExtension;
+            }
         }
 
         return s3UploadService.saveFile(file, newFileName);
@@ -543,5 +583,67 @@ public class AdminController {
         model.addAttribute("username", username);
 
         return "admin";
+    }
+
+    @GetMapping("/admin/banners/{bannerId}/change")
+    public String showBannerEditForm(@PathVariable Long bannerId, Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
+        User user = userRepository.findByName(principal.getName());
+        String authority = user.getAuthority();
+        if (!authority.equals("ADMIN")) {
+            return "redirect:/errorPage";
+        }
+
+        Optional<Banner> bannerOpt = projectService.findBannerById(bannerId);
+
+        if (!bannerOpt.isPresent()) {
+            return "redirect:/admin/banners";
+        }
+
+        model.addAttribute("entity", bannerOpt.get());
+        model.addAttribute("tableName", "Banners");
+
+        return "adminChangeBanner";
+    }
+
+    @PostMapping("/admin/banners/{bannerId}/change")
+    public String updateBanner(@PathVariable Long bannerId,
+                               @ModelAttribute("bannerImageDTO") BannerImageDTO bannerImageDTO,
+                               RedirectAttributes redirectAttributes) {
+
+        try {
+            MultipartFile image = bannerImageDTO.getImageLink();
+
+            String imageLink = null;
+
+            if (image != null && !image.isEmpty()) {
+                imageLink = saveImage(image, "Banner", bannerId);
+            }
+
+            Banner banner = projectService.findBannerById(bannerId).orElseThrow(() -> new Exception("Banner not found."));
+
+            updateBannerEntityFromDTO(banner, bannerImageDTO, imageLink);
+
+            projectService.saveOrUpdateBanner(banner);
+
+            redirectAttributes.addFlashAttribute("success", "Banner updated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();;
+            redirectAttributes.addFlashAttribute("error", "Error updating banner: " + e.getMessage());
+        }
+
+        return "redirect:/admin/banners";
+    }
+
+    private void updateBannerEntityFromDTO(Banner banner, BannerImageDTO dto, String imageLink) {
+        // DTO에서 기본 정보를 업데이트
+        banner.setName(dto.getName());
+
+        // 이미지 링크 설정
+        if (imageLink != null) banner.setImageLink(imageLink);
+
+        banner.setName(dto.getName());
     }
 }
