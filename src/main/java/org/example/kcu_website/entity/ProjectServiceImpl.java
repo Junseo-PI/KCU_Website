@@ -16,17 +16,19 @@ public class ProjectServiceImpl implements ProjectService {
     private final UserRepository userRepository;
     private final BannerRepository bannerRepository;
     private final LeaderRepository leaderRepository;
+    private final GetInvolvedRepository getInvolvedRepository;
 
     @Autowired
     public ProjectServiceImpl(ProjectRepository projectRepository, ParticipantRepository participantRepository,
                               SemesterRepository semesterRepository, UserRepository userRepository,
-                              BannerRepository bannerRepository, LeaderRepository leaderRepository) {
+                              BannerRepository bannerRepository, LeaderRepository leaderRepository, GetInvolvedRepository getInvolvedRepository) {
         this.projectRepository = projectRepository;
         this.participantRepository = participantRepository;
         this.semesterRepository = semesterRepository;
         this.userRepository = userRepository;
         this.bannerRepository = bannerRepository;
         this.leaderRepository = leaderRepository;
+        this.getInvolvedRepository = getInvolvedRepository;
     }
 
     @Override
@@ -57,6 +59,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Leader> getAllLeaders() {
         return leaderRepository.findAll();
+    }
+
+    @Override
+    public List<GetInvolved> getAllGetInvolved() {
+        return getInvolvedRepository.findAll();
     }
 
     @Override
@@ -103,6 +110,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Leader saveOrUpdateLeader(Leader leader) {
         return leaderRepository.save(leader);
+    }
+
+    @Override
+    public GetInvolved saveOrUpdateGetInvolved(GetInvolved getInvolved) {
+        return getInvolvedRepository.save(getInvolved);
     }
 
     @Override

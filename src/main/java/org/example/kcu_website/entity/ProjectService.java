@@ -12,6 +12,7 @@ public interface ProjectService {
     List<User> getAllUsers();
     List<Banner> getAllBanners();
     List<Leader> getAllLeaders();
+    List<GetInvolved> getAllGetInvolved();
 
     Optional<Project> findProjectById(Long projectId);
     Optional<Participant> findParticipantById(Long participantId);
@@ -24,6 +25,7 @@ public interface ProjectService {
     Project saveOrUpdateProject(Project project);
     Banner saveOrUpdateBanner(Banner banner);
     Leader saveOrUpdateLeader(Leader leader);
+    GetInvolved saveOrUpdateGetInvolved(GetInvolved getInvolved);
 
     List<Project> getProjectsBySemesterId(Long semesterId);
 }

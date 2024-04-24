@@ -112,7 +112,7 @@
                   th:object="${entity}" method="post" class="module aligned">
 
                 <div class="form-row field-id">
-                    <label class="required" for="participantId">
+                    <label class="required" for="semesterId">
                         Semester ID:
                     </label>
                     <input type="text" id="semesterId" th:value="${entity.id}" readonly class="vTextField"/>
@@ -142,6 +142,50 @@
             </form>
         </div>
         <!-- END Semesters Form -->
+
+
+        <!-- GetInvolved Form -->
+        <div th:if="${tableName == 'GetInvolved'}">
+            <form th:action="@{/admin/getinvolved/{involvedId}/change(involvedId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned">
+
+                <div class="form-row field-id">
+                    <label class="required" for="involvedId">
+                        Get Involved ID:
+                    </label>
+                    <input type="text" id="involvedId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+
+                <div class="form-row field-term">
+                    <label class="required" for="involvedName">Name:</label>
+                    <input type="text" id="involvedName" name="involvedName" th:value="${entity.name}" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-date">
+                    <label for="startDate" class="required">Form Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" th:value="${entity.startDate}" value="2024-04-23" required/>
+                </div>
+
+                <div class="form-row field-date">
+                    <label for="endDate" class="required">Form End Date:</label>
+                    <input type="date" id="endDate" name="endDate" th:value="${entity.endDate}" value="2024-04-23" required/>
+                </div>
+
+                <div class="form-row field-year">
+                    <label for="formLink" class="required">Form Link:</label>
+                    <input type="url" id="formLink" name="formLink" th:value="${entity.link}" required/>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="IdForInvolvedVerifying" name="id" th:value="${entity.id}"/>
+                </div>
+
+                <div>
+                </div>
+            </form>
+        </div>
+        <!-- END GetInvolved Form -->
     </div>
     <!-- END Content -->
 </div>

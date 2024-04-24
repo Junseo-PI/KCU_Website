@@ -16,11 +16,6 @@ public class WebPageController {
     return "websiteDevelopers";
   }
 
-  @GetMapping("/getinvolved")
-  public String getinvolved() {
-    return "getInvolved";
-  }
-
   @GetMapping("/login")
   public String login() {
     return "login";

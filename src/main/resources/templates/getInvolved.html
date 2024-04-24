@@ -19,12 +19,16 @@
         <!-- Header -->
         <div th:insert="~{header :: head}"></div>
 
-        <div class="getInvolved-section-open">
+        <div class="involved-title">
+            <h1>Get Involved</h1>
+        </div>
+
+        <div th:if="${isWithinPeriod}" class="getInvolved-section-open">
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScrKK81hJIF0aQX6Lxf3VeM1fDIKND0SnxRk7ytTOSCIu5liQ/viewform" class="get-involved-form"></iframe>
         </div>
 
-        <div class="getInvolved-section-closed">
-            <!-- 신청기간이 아닐 때에는 죄송합니다 현재 부원을 받고있지 않습니다와 같은 글 표시하기 -->
+        <div th:unless="${isWithinPeriod}" class="getInvolved-section-closed">
+            <a>Sorry, we are not accepting members at this time.</a>
         </div>
 
         <!-- Footer -->

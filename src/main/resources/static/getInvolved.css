@@ -142,6 +142,33 @@ html {
     height: 1080px;
 }
 
+.involved-title {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.involved-title h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
 .getInvolved-section-closed {
-    display: none;
+    margin-top: 2rem;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 1319px) {
+    .involved-title h1{
+        font-size: 2rem;
+    }
+
+    .getInvolved-section-closed a {
+        font-size: 1.3rem;
+    }
 }
