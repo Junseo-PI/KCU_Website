@@ -34,3 +34,5 @@ application.properties
 /dist/
 /nbdist/
 /.nb-gradle/
+
+DataInitializer.java
