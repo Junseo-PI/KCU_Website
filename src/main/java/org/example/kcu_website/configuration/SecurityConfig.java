@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/login")
                         .permitAll());
 
         http.csrf(AbstractHttpConfigurer::disable);
