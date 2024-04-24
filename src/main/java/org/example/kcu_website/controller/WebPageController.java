@@ -11,11 +11,6 @@ public class WebPageController {
     return "aboutKcu";
   }
 
-  @GetMapping("/leaders")
-  public String leaders() {
-    return "leaders";
-  }
-
   @GetMapping("/developers")
   public String developers() {
     return "websiteDevelopers";

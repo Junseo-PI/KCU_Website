@@ -15,16 +15,18 @@ public class ProjectServiceImpl implements ProjectService {
     private final SemesterRepository semesterRepository;
     private final UserRepository userRepository;
     private final BannerRepository bannerRepository;
+    private final LeaderRepository leaderRepository;
 
     @Autowired
     public ProjectServiceImpl(ProjectRepository projectRepository, ParticipantRepository participantRepository,
                               SemesterRepository semesterRepository, UserRepository userRepository,
-                              BannerRepository bannerRepository) {
+                              BannerRepository bannerRepository, LeaderRepository leaderRepository) {
         this.projectRepository = projectRepository;
         this.participantRepository = participantRepository;
         this.semesterRepository = semesterRepository;
         this.userRepository = userRepository;
         this.bannerRepository = bannerRepository;
+        this.leaderRepository = leaderRepository;
     }
 
     @Override
@@ -53,6 +55,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Leader> getAllLeaders() {
+        return leaderRepository.findAll();
+    }
+
+    @Override
     public Optional<Project> findProjectById(Long projectId) {
         return projectRepository.findById(projectId);
     }
@@ -72,6 +79,11 @@ public class ProjectServiceImpl implements ProjectService {
         return bannerRepository.findById(bannerId);
     }
 
+    @Override
+    public Optional<Leader> findLeaderById(Long leaderId) {
+        return leaderRepository.findById(leaderId);
+    }
+
     // saveOrUpdateParticipant 구현
     @Override
     public Participant saveOrUpdateParticipant(Participant participant) {
@@ -86,6 +98,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Banner saveOrUpdateBanner(Banner banner) {
         return bannerRepository.save(banner);
+    }
+
+    @Override
+    public Leader saveOrUpdateLeader(Leader leader) {
+        return leaderRepository.save(leader);
     }
 
     @Override

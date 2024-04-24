@@ -25,26 +25,20 @@
             <h1>Leaders</h1>
         </div>
 
-        <div class="about-leaders">
+        <div th:each="leader : ${leaders}" class="about-leaders">
             <div class="leader-image">
-                <img src="images/dummy_profile.jpg" class="profile">
+                <img th:src="@{${leader.imageLink}}" class="profile">
             </div>
             <div class="leader-contents">
-                <div class="leader-name">
-                    Hyeonmin Yang
-                </div>
+                <div th:text="${leader.name}" class="leader-name"></div>
                 <div class="leader-semesters">
+                    <span th:text="${leader.startSemester} + ' - ' + ${leader.endSemester}"></span>
                     <span>
-                        SP24 - PRESENT
-                    </span>
-                    <span>
-                        <a href="mailto:dkim762@wisc.edu">dkim762@wisc.edu</a>
+                        <a th:href="'mailto:' + ${leader.email}" th:text="${leader.email}"></a>
                     </span>
                 </div>
                 <div class="leader-description">
-                    <a>
-                        Introduce yourself (Max 500 characters): Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque placerat interdum gravida. Aliquam sed cursus diam, et pulvinar nisi. Fusce vehicula quam metus, ac sagittis risus dictum non. Fusce id accumsan sem, eu sodales ipsum. Suspendisse porttitor nibh sed gravida eleifend. Etiam suscipit vel urna ac porttitor. Etiam metus sapien, ullamcorper vitae facilisis eu, faucibus ac ante. Pellentesque eu euismod nisi. Aliquam interdum mauris a efficitur volutpat. Vivamus interdum arcu dui eu.
-                    </a>
+                    <a th:text="${leader.introduction}"></a>
                 </div>
             </div>
         </div>

@@ -69,6 +69,10 @@
                     <input type="file" id="imageLink" accept="image/png, image/jpeg" name="image_link"/>
                 </div>
 
+                <div class="form-row field-role imageupload">
+                    <label class="required">Suggested Banner Image Size: 1305 x 450</label>
+                </div>
+
                 <div class="submit-row-addchange">
                     <input class="default" type="submit" value="Save" name="_save"/>
                     <input type="hidden" id="IdForVerification" name="id" th:value="${entity.id}"/>
@@ -76,6 +80,64 @@
             </form>
         </div>
         <!-- END Banners Form -->
+
+        <!-- Leaders Form -->
+        <div th:if="${tableName == 'Leaders'}">
+            <form th:action="@{/admin/leaders/{leaderId}/change(leaderId=${entity.id})}"
+                  th:object="${entity}" method="post" class="module aligned" enctype="multipart/form-data">
+
+                <div class="form-row field-id">
+                    <label class="required" for="leaderId">
+                        Leader ID:
+                    </label>
+                    <input type="text" id="leaderId" th:value="${entity.id}" readonly class="vTextField"/>
+                </div>
+
+                <div class="form-row field-name">
+                    <label for="leaderName" class="required">Name:</label>
+                    <input type="text" id="leaderName" th:field="*{name}" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-email">
+                    <label for="leaderEmail" class="required">Email:</label>
+                    <input type="email" id="leaderEmail" th:field="*{email}" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-startSemester">
+                    <label for="leaderStartSemester" class="required">Start Semester:</label>
+                    <input type="text" id="leaderStartSemester" th:field="*{startSemester}" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-startSemester">
+                    <label for="leaderEndSemester" class="required">End Semester:</label>
+                    <input type="text" id="leaderEndSemester" th:field="*{endSemester}" class="vTextField"/>
+                </div>
+
+                <div class="form-row field-startSemester">
+                    <label for="leaderIntroduction" class="required">Introduce Yourself:</label>
+                    <textarea id="leaderIntroduction" th:field="*{introduction}" maxlength="500" rows="10" cols="50" class="vTextField"></textarea>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink2" class="required">Profile Image Upload:</label>
+                    <div id="image-status2">
+                        <p>File has already been uploaded.</p>
+                        <button type="button" onclick="showUploadField('imageLink2', 'image-status2')">Re-upload</button>
+                    </div>
+                    <input type="file" id="imageLink2" accept="image/png, image/jpeg" name="image_link"/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label class="required">Suggested Profile Image Size: 500 x 500</label>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                    <input type="hidden" id="IdForLeadersVerification" name="id" th:value="${entity.id}"/>
+                </div>
+            </form>
+        </div>
+        <!-- END Leaders Form -->
     </div>
 
 
@@ -86,6 +148,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         var imagesLinkInfo = {
             'imageLink': [[${entity.imageLink}]],
+            'imageLink2': [[${entity.imageLink}]],
         };
 
         // 페이지 로드 시 이미지 링크 상태에 따라 엘리먼트 표시를 조절합니다.
@@ -93,14 +156,26 @@
             if (imagesLinkInfo.hasOwnProperty(key)) {
                 var value = imagesLinkInfo[key];
                 var statusId = 'image' + '-status';
+                var statusId2 = 'image' + '-status2';
                 var inputId = 'imageLink';
+                var inputId2 = 'imageLink2';
 
                 if (value === null) {
-                    document.getElementById(statusId).style.display = 'none';
-                    document.getElementById(inputId).style.display = 'block';
+                    try {
+                        document.getElementById(statusId).style.display = 'none';
+                        document.getElementById(inputId).style.display = 'block';
+                    } catch (e) {
+                        document.getElementById(statusId2).style.display = 'none';
+                        document.getElementById(inputId2).style.display = 'block';
+                    }
                 } else {
-                    document.getElementById(statusId).style.display = 'block';
-                    document.getElementById(inputId).style.display = 'none';
+                    try {
+                        document.getElementById(statusId).style.display = 'block';
+                        document.getElementById(inputId).style.display = 'none';
+                    } catch (e) {
+                        document.getElementById(statusId2).style.display = 'block';
+                        document.getElementById(inputId2).style.display = 'none';
+                    }
                 }
             }
         }

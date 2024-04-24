@@ -110,6 +110,51 @@
             </form>
         </div>
         <!-- END Projects Form -->
+
+        <!-- Leaders Form -->
+        <div th:if="${tableName == 'Leaders'}">
+            <form th:action="@{/admin/leaders/add}" method="post" class="module aligned" enctype="multipart/form-data">
+
+                <div class="form-row field-name">
+                    <label for="leaderName" class="required">Name:</label>
+                    <input type="text" id="leaderName" name="leaderName" class="vTextField" required/>
+                </div>
+
+                <div class="form-row field-email">
+                    <label for="email" class="required">Email:</label>
+                    <input type="text" id="email" name="email" class="vTextField" required/>
+                </div>
+
+                <div class="form-row field-startSemester">
+                    <label for="startSemester" class="required">Start Semester:</label>
+                    <input type="text" id="startSemester" name="startSemester" class="vTextField" required/>
+                </div>
+
+                <div class="form-row field-endSemester">
+                    <label for="endSemester" class="required">End Semester:</label>
+                    <input type="text" id="endSemester" name="endSemester" class="vTextField" required/>
+                </div>
+
+                <div class="form-row field-introduction">
+                    <label for="introduction" class="required">Introduce Yourself:</label>
+                    <textarea id="introduction" name="introduction" maxlength="500" rows="10" cols="50" class="vTextField" required></textarea>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label for="imageLink" class="required">Profile Image Upload:</label>
+                    <input type="file" id="imageLink" accept="image/png, image/jpeg" name="imageLink" required/>
+                </div>
+
+                <div class="form-row field-role imageupload">
+                    <label class="required">Suggested Profile Image Size: 500 x 500</label>
+                </div>
+
+                <div class="submit-row-addchange">
+                    <input class="default" type="submit" value="Save" name="_save"/>
+                </div>
+            </form>
+        </div>
+        <!-- END Leaders Form -->
     </div>
     <!-- END Content -->
 </div>

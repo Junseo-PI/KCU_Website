@@ -1,9 +1,7 @@
 package org.example.kcu_website.controller;
 
-import org.example.kcu_website.model.Participant;
-import org.example.kcu_website.model.Project;
-import org.example.kcu_website.model.ProjectDTO;
-import org.example.kcu_website.model.Semester;
+import org.example.kcu_website.entity.ProjectServiceImpl;
+import org.example.kcu_website.model.*;
 import org.example.kcu_website.repository.ParticipantRepository;
 import org.example.kcu_website.repository.ProjectRepository;
 import org.example.kcu_website.repository.SemesterRepository;
@@ -25,6 +23,14 @@ public class ProjectsController {
   private SemesterRepository semesterRepository;
   @Autowired
   private ParticipantRepository participantRepository;
+  private ProjectServiceImpl projectService;
+
+  public ProjectsController(ProjectRepository projectRepository, SemesterRepository semesterRepository, ParticipantRepository participantRepository, ProjectServiceImpl projectService) {
+    this.projectRepository = projectRepository;
+    this.semesterRepository = semesterRepository;
+    this.participantRepository = participantRepository;
+    this.projectService = projectService;
+  }
 
   // 최신 학기로 리다이렉트
   @GetMapping("/projects")
@@ -115,6 +121,10 @@ public class ProjectsController {
     }).collect(Collectors.toList());
 
     // 모델에 추가
+
+    List<Banner> banners = projectService.getAllBanners();
+    model.addAttribute("banners", banners);
+
     model.addAttribute("latestSemesterName", latestSemester.getName());
     model.addAttribute("projectDTOs", projectDTOs);
 

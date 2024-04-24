@@ -11,16 +11,19 @@ public interface ProjectService {
     List<Semester> getAllSemesters();
     List<User> getAllUsers();
     List<Banner> getAllBanners();
+    List<Leader> getAllLeaders();
 
     Optional<Project> findProjectById(Long projectId);
     Optional<Participant> findParticipantById(Long participantId);
     Optional<Semester> findSemesterById(Long semesterId);
     Optional<Banner> findBannerById(Long bannerId);
+    Optional<Leader> findLeaderById(Long leaderId);
 
     Participant saveOrUpdateParticipant(Participant participant);
     Semester saveOrUpdateSemester(Semester semester);
     Project saveOrUpdateProject(Project project);
     Banner saveOrUpdateBanner(Banner banner);
+    Leader saveOrUpdateLeader(Leader leader);
 
     List<Project> getProjectsBySemesterId(Long semesterId);
 }

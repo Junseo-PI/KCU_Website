@@ -11,7 +11,6 @@ import org.example.kcu_website.s3.S3UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +89,14 @@ public class AdminController {
                     return "redirect:/errorPage";
                 }
                 items = projectService.getAllBanners();
+                break;
+
+            case "leaders":
+                if (!authority.equals("ADMIN")) {
+                    return "redirect:/errorPage";
+                }
+                items = projectService.getAllLeaders();
+                break;
         }
 
         model.addAttribute("tableName", tableName.substring(0, 1).toUpperCase() + tableName.substring(1));
@@ -296,14 +303,14 @@ public class AdminController {
         return s3UploadService.saveFile(file, newFileName);
     }
 
-    private String saveImage(MultipartFile file, String banner, Long bannerId) throws IOException {
+    private String saveImage(MultipartFile file, String choice, Long id) throws IOException {
         String newFileName = "";
-        if (banner.equals("Banner")) {
+        if (choice.equals("Banner")) {
             if (file.isEmpty()) {
-                throw new IOException("Failed to save empty file for banner ID: " + bannerId);
+                throw new IOException("Failed to save empty file for banner ID: " + id);
             }
 
-            Optional<Banner> bannerOpt = projectService.findBannerById(bannerId);
+            Optional<Banner> bannerOpt = projectService.findBannerById(id);
             if (!bannerOpt.isPresent()) {
                 throw new IllegalStateException("Banner Not Found");
             }
@@ -322,7 +329,33 @@ public class AdminController {
                     }
                 }
 
-                newFileName = "banner-" + bannerId + originalFileExtension;
+                newFileName = "banner-" + id + originalFileExtension;
+            }
+        } else if (choice.equals("Leader")) {
+            if (file.isEmpty()) {
+                throw new IOException("Failed to save empty file for leader ID: " + id);
+            }
+
+            Optional<Leader> leaderOpt = projectService.findLeaderById(id);
+            if (!leaderOpt.isPresent()) {
+                throw new IllegalStateException("Leader Not Found");
+            }
+
+            if (!file.isEmpty()) {
+                String contentType = file.getContentType();
+                String originalFileExtension = "";
+
+                if (!ObjectUtils.isEmpty(contentType)) {
+                    if (contentType.contains("image/jpeg")) {
+                        originalFileExtension = ".jpg";
+                    } else if (contentType.contains("image/png")) {
+                        originalFileExtension = ".png";
+                    } else {
+                        throw new IOException("Only jpeg and png are allowed.");
+                    }
+                }
+
+                newFileName = "leader-" + id + originalFileExtension;
             }
         }
 
@@ -460,7 +493,7 @@ public class AdminController {
         List<Semester> semesters = projectService.getAllSemesters();
         model.addAttribute("semesters", semesters);
 
-        return "adminAddProjects";
+        return "adminAddProjectsLeaders";
     }
 
     @PostMapping("/admin/projects/add")
@@ -605,7 +638,7 @@ public class AdminController {
         model.addAttribute("entity", bannerOpt.get());
         model.addAttribute("tableName", "Banners");
 
-        return "adminChangeBanner";
+        return "adminChangeBannerLeader";
     }
 
     @PostMapping("/admin/banners/{bannerId}/change")
@@ -645,5 +678,125 @@ public class AdminController {
         if (imageLink != null) banner.setImageLink(imageLink);
 
         banner.setName(dto.getName());
+    }
+
+    @GetMapping("/admin/leaders/{leaderId}/change")
+    public String showLeaderEditForm(@PathVariable Long leaderId, Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
+        User user = userRepository.findByName(principal.getName());
+        String authority = user.getAuthority();
+        if (!authority.equals("ADMIN")) {
+            return "redirect:/errorPage";
+        }
+
+        Optional<Leader> leaderOpt = projectService.findLeaderById(leaderId);
+
+        if (!leaderOpt.isPresent()) {
+            return "redirect:/admin/leaders";
+        }
+
+        model.addAttribute("entity", leaderOpt.get());
+        model.addAttribute("tableName", "Leaders");
+
+        return "adminChangeBannerLeader";
+    }
+
+    @PostMapping("/admin/leaders/{leaderId}/change")
+    public String updateLeader(@PathVariable Long leaderId,
+                               @ModelAttribute("leaderImageDTO") LeaderImageDTO leaderImageDTO,
+                               RedirectAttributes redirectAttributes) {
+
+        try {
+            MultipartFile image = leaderImageDTO.getImageLink();
+
+            String imageLink = null;
+
+            if (image != null && !image.isEmpty()) {
+                imageLink = saveImage(image, "Leader", leaderId);
+            }
+
+            Leader leader = projectService.findLeaderById(leaderId).orElseThrow(() -> new Exception("Banner not found."));
+
+            updateLeaderEntityFromDTO(leader, leaderImageDTO, imageLink);
+
+            projectService.saveOrUpdateLeader(leader);
+
+            redirectAttributes.addFlashAttribute("success", "Leader updated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();;
+            redirectAttributes.addFlashAttribute("error", "Error updating leader: " + e.getMessage());
+        }
+
+        return "redirect:/admin/leaders";
+    }
+
+    private void updateLeaderEntityFromDTO(Leader leader, LeaderImageDTO dto, String imageLink) {
+        // DTO에서 기본 정보를 업데이트
+        leader.setName(dto.getName());
+
+        // 이미지 링크 설정
+        if (imageLink != null) leader.setImageLink(imageLink);
+
+        leader.setEmail(dto.getEmail());
+        leader.setEndSemester(dto.getEndSemester());
+        leader.setIntroduction(dto.getIntroduction());
+        leader.setStartSemester(dto.getStartSemester());
+    }
+
+    @GetMapping("/admin/leaders/add")
+    public String showLeadersAddForm(Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
+        model.addAttribute("tableName", "Leaders");
+
+        return "adminAddProjectsLeaders";
+    }
+
+    @PostMapping("/admin/leaders/add")
+    public String addLeaders(@RequestParam("leaderName") String leaderName,
+                             @RequestParam("email") String email,
+                             @RequestParam("startSemester") String startSemester,
+                             @RequestParam("endSemester") String endSemester,
+                             @RequestParam("introduction") String introduction,
+                             @ModelAttribute("leaderImageDTO") LeaderImageDTO leaderImageDTO,
+                             RedirectAttributes redirectAttributes) {
+
+        Leader newLeader = new Leader();
+
+        newLeader.setName(leaderName);
+        newLeader.setEmail(email);
+        newLeader.setStartSemester(startSemester);
+        newLeader.setEndSemester(endSemester);
+        newLeader.setIntroduction(introduction);
+
+        projectService.saveOrUpdateLeader(newLeader);
+
+        Long leaderId = newLeader.getId();
+
+        try {
+            leaderImageDTO.setName(newLeader.getName());
+            MultipartFile image = leaderImageDTO.getImageLink();
+
+            String imageLink = null;
+
+            if (image != null && !image.isEmpty()) {
+                imageLink = saveImage(image, "Leader", leaderId);
+            }
+
+            updateLeaderEntityFromDTO(newLeader, leaderImageDTO, imageLink);
+
+            projectService.saveOrUpdateLeader(newLeader);
+
+            redirectAttributes.addFlashAttribute("success", "Leader updated successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("error", "Error updating project: " + e.getMessage());
+        }
+
+        redirectAttributes.addFlashAttribute("success", "Project added successfully!");
+        return "redirect:/admin/leaders";
     }
 }
