@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Random;
 import org.example.kcu_website.entity.ProjectService;
 import org.example.kcu_website.model.*;
+import org.example.kcu_website.repository.GetInvolvedRepository;
 import org.example.kcu_website.repository.SemesterRepository;
 import org.example.kcu_website.repository.UserRepository;
 import org.example.kcu_website.s3.S3UploadService;
@@ -34,6 +35,8 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private GetInvolvedRepository getInvolvedRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -41,12 +44,13 @@ public class AdminController {
     @Autowired
     private S3UploadService s3UploadService;
 
-    public AdminController(ProjectService projectService, SemesterRepository semesterRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, S3UploadService s3UploadService) {
+    public AdminController(ProjectService projectService, SemesterRepository semesterRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, S3UploadService s3UploadService, GetInvolvedRepository getInvolvedRepository) {
         this.projectService = projectService;
         this.semesterRepository = semesterRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.s3UploadService = s3UploadService;
+        this.getInvolvedRepository = getInvolvedRepository;
     }
 
     @RequestMapping("/admin/{tableName}")
@@ -96,6 +100,13 @@ public class AdminController {
                     return "redirect:/errorPage";
                 }
                 items = projectService.getAllLeaders();
+                break;
+
+            case "getinvolved":
+                if (!authority.equals("ADMIN")) {
+                    return "redirect:/errorPage";
+                }
+                items = projectService.getAllGetInvolved();
                 break;
         }
 
@@ -798,5 +809,40 @@ public class AdminController {
 
         redirectAttributes.addFlashAttribute("success", "Project added successfully!");
         return "redirect:/admin/leaders";
+    }
+
+    @GetMapping("/admin/getinvolved/{involvedId}/change")
+    public String showGetInvolvedEditForm(@PathVariable Long involvedId, Model model, Principal principal) {
+        String username = principal != null ? principal.getName() : "Anonymous";
+        model.addAttribute("username", username);
+
+        GetInvolved getInvolved = getInvolvedRepository.findById(involvedId)
+                .orElseThrow(() -> new IllegalStateException("Semester Not Found"));
+
+        model.addAttribute("tableName", "GetInvolved");
+        model.addAttribute("entity", getInvolved);
+
+        return "adminChange";
+    }
+
+    @PostMapping("/admin/getinvolved/{involvedId}/change")
+    public String updateGetInvolved(@PathVariable Long involvedId,
+                                    @RequestParam("involvedName") String name,
+                                    @RequestParam("startDate") String startDate,
+                                    @RequestParam("endDate") String endDate,
+                                    @RequestParam("formLink") String link,
+                                    RedirectAttributes redirectAttributes) {
+        GetInvolved getInvolved = getInvolvedRepository.findById(involvedId)
+                .orElseThrow(() -> new IllegalStateException("GetInvolved Semester Not Found"));
+
+        getInvolved.setName(name);
+        getInvolved.setStartDate(startDate);
+        getInvolved.setEndDate(endDate);
+        getInvolved.setLink(link);
+
+        projectService.saveOrUpdateGetInvolved(getInvolved);
+
+        redirectAttributes.addFlashAttribute("success", "GetInvolved updated successfully!");
+        return "redirect:/admin/getinvolved";
     }
 }
