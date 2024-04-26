@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to KCU!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="aboutKcu.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
 
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+<section id="container" class="page-index">
+    <!-- Header -->
+    <div th:insert="~{header :: head}"></div>
+
+    <section class="aboutkcu-section">
+        <div class="aboutkcu-title">
+            <h1>What is KCU?</h1>
+        </div>
+
+        <div class="korean-leader">
+            <p>
+                안녕하세요! KCU에 오신것을 환영합니다. 저는 미디어 임원, 기술임원, 부회장 그리고 회장을 역임하면서 KCU의 작은 한걸음들을 보았습니다.
+                <br/>
+                제가 좋아하는 말 중에 "1명의 10걸음 보다 10명의 1걸음이 더 크다" 라는 말 처럼 학기중에 혼자 프로젝트를 진행하기 어려울 수 있지만, KCU와 함께 같이 걸어가요!
+                <br/>
+                - KCU 회장 양현민
+            </p>
+        </div>
+        <div class="korean-description">
+            <p>
+                Korean Undergraduate Computer Science Union(KCU)은 위스콘신 대학교 - 매디슨의 동아리입니다.
+                <br/>
+                매 학기 협력 프로젝트가 있습니다. 각 팀은 초급, 중급, 그리고 고급 세 레벨로 나뉩니다.
+                <br/>
+                학기 동안 완성된 프로젝트는 경쟁을 통해 동료에 의해 평가되며, 매 학기 마지막 회의에서 1등과 2등 팀이 결정됩니다.
+            </p>
+        </div>
+
+        <div class="english-leader">
+            <p>
+                Welcome to KCU!
+                <br/>
+                I have seen the small steps of KCU while serving as a media executive, technical executive, vice president, and president.
+                <br/>
+                There's a saying like, "10 steps by one person are not as great as one step by ten people."
+                <br/>
+                Although it might be difficult to work on projects alone during the semester, let's walk together with KCU!
+                <br/>
+                - Hyeonmin Yang, President of KCU
+            </p>
+        </div>
+
+        <div class="english-description">
+            <p>
+                The Korean Undergraduate Computer Science Union, a group at the University of Wisconsin - Madison, is known by its abbreviation, KCU.
+                <br/>
+                Every semester, there are collaborative projects. There are three levels of team: Novice, Intermediate, and Advanced.
+                <br/>
+                Projects completed throughout the course of the semester are evaluated by peers through competition, and the team's top and second place are determined at the final meeting of each semester.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div th:insert="~{footer :: foot}"></div>
+</section>
 </body>
+
+<script type="text/javascript" src="/script.js"></script>
 </html>

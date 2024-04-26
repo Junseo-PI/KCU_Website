@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, div, p, span, em, small, a, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+a {
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+img {
+    vertical-align: top;
+}
+
+body, input, select, button, textarea {
+    color: rgb(0, 0, 0);
+    font-family: "Noto Sans KR", "Noto Sans CJK KR", "Noto Sans", "Apple SD Gothic Neo", "애플 SD 산돌고딕 Neo", AppleGothic, "New Roboto", Roboto, -apple-system, system, BlinkMacSystemFont, "SF UI Text", "SF Pro Text", BlinkMacSystemFont, "Nanum Gothic", "나눔 고딕", "Malgun Gothic", "맑은 고딕", Dotum, 돋움, Gullim, 굴림, "droid sans fallback", "Droid Sans", "Segoe UI", "helvetica neue", Tahoma, "Microsoft Sans Serif", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.btn, a.btn {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.btn-font-400, a.btn.btn-font-400 {
+    font-weight: 400;
+}
+
+.btn.btn-size-1, a.btn.btn-size-1 {
+    height: 100%;
+    padding: 0px 1.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 300;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Light-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Light-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Light-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Light-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 400;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Regular-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Regular-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Regular-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Regular-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 500;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Medium-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Medium-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Medium-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Medium-Hestia.otf) format('opentype');
+}
+
+@font-face {
+    font-family: "Noto Sans KR";
+    font-style: normal;
+    font-weight: 700;
+    src: local("※"),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/eot/NotoSansKR-Bold-Hestia.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/woff/NotoSansKR-Bold-Hestia.woff) format('woff'),
+    url(https://cdn.jsdelivr.net/gh/theeluwin/NotoSansKR-Hestia@master/fonts/otf/NotoSansKR-Bold-Hestia.otf) format('opentype');
+}
+
+.btn, a.btn {
+    display: inline-block;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn.btn-font-400, a.btn.btn-font-400 {
+    font-weight: 400;
+}
+
+.btn.btn-size-1, a.btn.btn-size-1 {
+    height: 100%;
+    padding: 0px 1.5rem;
+    font-size: 1.8rem;
+    line-height: 3rem;
+}
+
+html {
+    line-height: 1.5;
+    text-size-adjust: none;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+
+.aboutkcu-section {
+    padding-left: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+    padding-right: calc((100vw - 1320px) / 2); /* Dynamic Padding */
+}
+
+.aboutkcu-title {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.aboutkcu-title h1{
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+.korean-leader, .korean-description, .english-description {
+    margin-top: 3rem;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2.5rem;
+}
+
+.english-leader {
+    margin-top: 5rem;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2.5rem;
+}
+
+@media (max-width: 1319px) {
+    .aboutkcu-section {
+        padding: 0 1rem;
+    }
+
+    .aboutkcu-title h1{
+        font-size: 2rem;
+    }
+
+    .korean-leader, .korean-description, .english-description {
+        margin-top: 2rem;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+    }
+
+    .english-leader {
+        margin-top: 4rem;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5rem;
+    }
+}
